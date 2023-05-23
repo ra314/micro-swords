@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://d23xjyxwwyedr"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_3namn"]
+[ext_resource type="PackedScene" uid="uid://c6sajd1aute1i" path="res://Barrier.tscn" id="2_qj3co"]
+[ext_resource type="PackedScene" uid="uid://ccbd5rrosfsx8" path="res://Swordsman.tscn" id="3_dbffi"]
+[ext_resource type="PackedScene" uid="uid://vr4m8fm5lv47" path="res://Sword.tscn" id="4_2fpqd"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_3namn")
+metadata/_edit_horizontal_guides_ = [0.0]
+
+[node name="L-Side-Wall" parent="." instance=ExtResource("2_qj3co")]
+position = Vector2(-64, 0)
+scale = Vector2(8, 135)
+
+[node name="R-Side-Wall" parent="." instance=ExtResource("2_qj3co")]
+position = Vector2(1920, 0)
+scale = Vector2(8, 135)
+
+[node name="Floor" parent="." instance=ExtResource("2_qj3co")]
+position = Vector2(0, 960)
+scale = Vector2(240, 7)
+
+[node name="Player1" parent="." instance=ExtResource("3_dbffi")]
+position = Vector2(0, 896)
+direction = 1
+held_item = 1
+
+[node name="Player2" parent="." instance=ExtResource("3_dbffi")]
+position = Vector2(1856, 896)
+held_item = 2
+
+[node name="Sword1" parent="." instance=ExtResource("4_2fpqd")]
+position = Vector2(48, 832)
+state = 2
+
+[node name="Sword2" parent="." instance=ExtResource("4_2fpqd")]
+position = Vector2(1856, 832)
+state = 2
+
+[node name="Button1" type="Button" parent="."]
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 1856.0
+offset_right = 1920.0
+offset_bottom = 64.0

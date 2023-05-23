@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccbd5rrosfsx8"]
+
+[ext_resource type="Texture2D" uid="uid://di23j62yi08gc" path="res://blue-square.svg" id="1_wpvrv"]
+[ext_resource type="Script" path="res://Swordsman.gd" id="1_y0qsv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mclpc"]
+size = Vector2(64, 64)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_y0qsv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_mclpc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+texture = ExtResource("1_wpvrv")
