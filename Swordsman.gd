@@ -21,8 +21,6 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	else:
-		velocity.y = 0
 	
 	# Handle switching directions
 	if approx_equal(position.x, 0):

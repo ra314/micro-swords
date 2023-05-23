@@ -21,7 +21,6 @@ func _physics_process(delta):
 			velocity.y += gravity * delta
 			move_and_slide()
 	elif state == ENUMS.SWORD_STATE.HELD:
-		print(position, velocity)
 		position += (velocity*delta)
 
 func action(direction: ENUMS.DIRECTION):
