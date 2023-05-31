@@ -55,6 +55,8 @@ func action(_direction: ENUMS.DIRECTION):
 	if direction == ENUMS.DIRECTION.LEFT:
 		velocity.x *= -1
 	state = ENUMS.SWORD_STATE.THROWN
+	# Enable collision with the ground
+	set_collision_mask_value(ENUMS.COLLISION_LAYER.FLOOR, true)
 
 func die():
 	queue_free()

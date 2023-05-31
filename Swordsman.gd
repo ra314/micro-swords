@@ -13,19 +13,21 @@ var last_held_item: ENUMS.HELD_ITEM
 func approx_equal(x, y):
 	return abs(y-x) < 0.1
 
-func get_sword(item: ENUMS.HELD_ITEM):
+func get_sword(item: ENUMS.HELD_ITEM) -> Sword: 
 	if item == ENUMS.HELD_ITEM.SWORD_1:
 		return $"../Sword1"
 	if item == ENUMS.HELD_ITEM.SWORD_2:
 		return $"../Sword2"
 	assert(false)
+	return null
 
-func get_swordsman(man: ENUMS.SWORDSMAN):
+func get_swordsman(man: ENUMS.SWORDSMAN) -> Swordsman:
 	if man == ENUMS.SWORDSMAN.BLACK:
 		return $"../Black"
 	if man == ENUMS.SWORDSMAN.BLUE:
 		return $"../Blue"
 	assert(false)
+	return null
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -67,6 +69,7 @@ func respond_to_collision(sword: Sword):
 				pickup_sword(sword)
 		ENUMS.SWORD_STATE.THROWN:
 			if last_held_item != sword.sword_name:
+				print("die")
 				die()
 				sword.die()
 		_:
@@ -78,10 +81,12 @@ func die():
 		get_sword(held_item).die()
 
 func pickup_sword(sword: Sword):
-	print("pickup")
+	held_item = sword.sword_name
+	sword.position = position-ConstData.DIR_TO_RELATIVE_SWORD_POS[direction]
+	sword.state = ENUMS.SWORD_STATE.HELD
+	sword.direction = direction
 
 func change_collision_with_sword(sword: Sword, enable: bool):
-	sword.set_collision_mask_value(ENUMS.COLLISION_LAYER.FLOOR, enable)
 	sword.set_collision_mask_value(ENUMS.COLLISION_LAYER.SWORDSMAN, enable)
 	match sword.sword_name:
 		ENUMS.HELD_ITEM.SWORD_1:
@@ -91,15 +96,20 @@ func change_collision_with_sword(sword: Sword, enable: bool):
 		_:
 			assert(false)
 
+func enable_sword_collision_if_possible(sword: Sword):
+	for swordsman_enum in ENUMS.SWORDSMAN.values():
+			var swordsman := get_swordsman(swordsman_enum)
+			if swordsman.held_item == ENUMS.HELD_ITEM.NONE:
+				swordsman.change_collision_with_sword(sword, true)
+
 func action():
 	if held_item == ENUMS.HELD_ITEM.NONE:
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
 	else:
-		# Enable collisions with the floor and the player
+		# Enable collisions between the sword and the swordsman
 		var sword: Sword = get_sword(held_item)
-		get_swordsman(ENUMS.SWORDSMAN.BLACK).change_collision_with_sword(sword, true)
-		get_swordsman(ENUMS.SWORDSMAN.BLUE).change_collision_with_sword(sword, true)
-		sword.action(direction)
 		last_held_item = held_item
 		held_item = ENUMS.HELD_ITEM.NONE
+		enable_sword_collision_if_possible(sword)
+		sword.action(direction)
