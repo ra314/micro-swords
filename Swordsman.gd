@@ -9,25 +9,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var held_item: ENUMS.HELD_ITEM
 @export var swordsman_name: ENUMS.SWORDSMAN
 var last_held_item: ENUMS.HELD_ITEM
+var root: Root
 
-func approx_equal(x, y):
-	return abs(y-x) < 0.1
-
-func get_sword(item: ENUMS.HELD_ITEM) -> Sword: 
-	if item == ENUMS.HELD_ITEM.SWORD_1:
-		return $"../Sword1"
-	if item == ENUMS.HELD_ITEM.SWORD_2:
-		return $"../Sword2"
-	assert(false)
-	return null
-
-func get_swordsman(man: ENUMS.SWORDSMAN) -> Swordsman:
-	if man == ENUMS.SWORDSMAN.BLACK:
-		return $"../Black"
-	if man == ENUMS.SWORDSMAN.BLUE:
-		return $"../Blue"
-	assert(false)
-	return null
+func _ready():
+	root = get_parent()
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -35,9 +20,9 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	
 	# Handle switching directions
-	if approx_equal(position.x, 0):
+	if Utils.approx_equal(position.x, 0):
 		direction = ENUMS.DIRECTION.RIGHT
-	elif approx_equal(position.x, 1920-64):
+	elif Utils.approx_equal(position.x, 1920-64):
 		direction = ENUMS.DIRECTION.LEFT
 	
 	# Set velocity based on direction
@@ -48,7 +33,7 @@ func _physics_process(delta):
 	
 	# Sync sword velocity with swordsman velocity
 	if held_item != ENUMS.HELD_ITEM.NONE:
-		get_sword(held_item).velocity = velocity
+		root.get_sword(held_item).velocity = velocity
 	
 	# MOVE
 	move_and_slide()
@@ -66,6 +51,7 @@ func respond_to_collision(sword: Sword):
 			pass
 		ENUMS.SWORD_STATE.GROUNDED:
 			if held_item == ENUMS.HELD_ITEM.NONE:
+				print("pickup")
 				pickup_sword(sword)
 		ENUMS.SWORD_STATE.THROWN:
 			if last_held_item != sword.sword_name:
@@ -78,7 +64,7 @@ func respond_to_collision(sword: Sword):
 func die():
 	queue_free()
 	if held_item != ENUMS.HELD_ITEM.NONE:
-		get_sword(held_item).die()
+		root.get_sword(held_item).die()
 
 func pickup_sword(sword: Sword):
 	held_item = sword.sword_name
@@ -86,30 +72,24 @@ func pickup_sword(sword: Sword):
 	sword.state = ENUMS.SWORD_STATE.HELD
 	sword.direction = direction
 
-func change_collision_with_sword(sword: Sword, enable: bool):
-	sword.set_collision_mask_value(ENUMS.COLLISION_LAYER.SWORDSMAN, enable)
-	match sword.sword_name:
-		ENUMS.HELD_ITEM.SWORD_1:
-			set_collision_mask_value(ENUMS.COLLISION_LAYER.SWORD_1, enable)
-		ENUMS.HELD_ITEM.SWORD_2:
-			set_collision_mask_value(ENUMS.COLLISION_LAYER.SWORD_2, enable)
-		_:
-			assert(false)
-
-func enable_sword_collision_if_possible(sword: Sword):
-	for swordsman_enum in ENUMS.SWORDSMAN.values():
-			var swordsman := get_swordsman(swordsman_enum)
-			if swordsman.held_item == ENUMS.HELD_ITEM.NONE:
-				swordsman.change_collision_with_sword(sword, true)
-
 func action():
+	# JUMP
 	if held_item == ENUMS.HELD_ITEM.NONE:
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
+	# THROW
 	else:
-		# Enable collisions between the sword and the swordsman
-		var sword: Sword = get_sword(held_item)
+		var other_swordsman := root.get_other_swordsman(swordsman_name)
+		var sword: Sword = root.get_sword(held_item)
+		
+		# Enable relevant collisions
+		sword.set_collision_mask_value(ENUMS.COLLISION_LAYER.FLOOR, true)
+		sword.set_collision_mask_value(ENUMS.COLLISION_LAYER.SWORDSMAN, true)
+		other_swordsman.set_collision_mask_value(sword.collision_layer(), true)
+		
+		# Update held item
 		last_held_item = held_item
 		held_item = ENUMS.HELD_ITEM.NONE
-		enable_sword_collision_if_possible(sword)
+		
+		# Perform throw
 		sword.action(direction)

@@ -9,20 +9,23 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var sword_name: ENUMS.HELD_ITEM
 var direction: ENUMS.DIRECTION
 var hor_speed: float
+var root: Root
 
-func approx_equal(x, y):
-	return abs(y-x) < 0.1
+func _ready():
+	root = get_parent()
+
+func collision_layer():
+	return ConstData.HELD_ITEM_TO_COLLISION_LAYER[sword_name]
 
 func _physics_process(delta):
 	if state == ENUMS.SWORD_STATE.THROWN:
 		if is_on_floor():
-			state = ENUMS.SWORD_STATE.GROUNDED
-			velocity = Vector2(0,0)
+			become_grounded()
 		else:
 			# Handle switching directions
-			if approx_equal(position.x, 0):
+			if Utils.approx_equal(position.x, 0):
 				direction = ENUMS.DIRECTION.RIGHT
-			elif approx_equal(position.x, 1920-64):
+			elif Utils.approx_equal(position.x, 1920-64):
 				direction = ENUMS.DIRECTION.LEFT
 			
 			# Set velocity based on direction
@@ -45,6 +48,15 @@ func detect_swordsman_collision():
 		if collider.name == "Black" or collider.name == "Blue":
 			collider.respond_to_collision(self)
 
+func become_grounded():
+	state = ENUMS.SWORD_STATE.GROUNDED
+	velocity = Vector2(0,0)
+	set_collision_mask_value(ENUMS.COLLISION_LAYER.SWORDSMAN, false)
+	for swordsman_enum in ENUMS.SWORDSMAN.values():
+		var swordsman := root.get_swordsman(swordsman_enum)
+		var enable_collision = swordsman.held_item == ENUMS.HELD_ITEM.NONE
+		swordsman.set_collision_mask_value(collision_layer(), enable_collision)
+
 func action(_direction: ENUMS.DIRECTION):
 	direction = _direction
 	assert(state == ENUMS.SWORD_STATE.HELD)
@@ -55,8 +67,7 @@ func action(_direction: ENUMS.DIRECTION):
 	if direction == ENUMS.DIRECTION.LEFT:
 		velocity.x *= -1
 	state = ENUMS.SWORD_STATE.THROWN
-	# Enable collision with the ground
-	set_collision_mask_value(ENUMS.COLLISION_LAYER.FLOOR, true)
+	print(velocity)
 
 func die():
 	queue_free()
