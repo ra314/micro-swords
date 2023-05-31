@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Sword
 
 const THROW_SPEED = 600.0
 const THROW_ANGLE = 45 # Measured from the floor

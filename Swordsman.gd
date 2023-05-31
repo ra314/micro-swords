@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Swordsman
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -6,6 +7,7 @@ const JUMP_VELOCITY = -400.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var direction: ENUMS.DIRECTION
 @export var held_item: ENUMS.HELD_ITEM
+var last_held_item: ENUMS.HELD_ITEM
 
 func approx_equal(x, y):
 	return abs(y-x) < 0.1
@@ -40,11 +42,29 @@ func _physics_process(delta):
 	
 	# MOVE
 	move_and_slide()
+	respond_to_collision()
+
+func respond_to_collision():
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		var collider_name: String = collision.get_collider().name
+		if collider_name.contains("Sword"):
+			var sword: Sword = collision.get_collider()
+			print("Collided with: ", collider_name)
+
+func change_collision_with_sword(sword: Sword, enable: bool):
+	sword.set_collision_mask_value(ENUMS.COLLISION_LAYER.FLOOR, enable)
+	sword.set_collision_mask_value(ENUMS.COLLISION_LAYER.SWORDSMAN, enable)
+	set_collision_mask_value(ENUMS.COLLISION_LAYER.SWORD, enable)
 
 func action():
 	if held_item == ENUMS.HELD_ITEM.NONE:
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
 	else:
-		get_sword(held_item).action(direction)
+		# Enable collisions with the floor and the player
+		var sword: Sword = get_sword(held_item)
+		change_collision_with_sword(sword, true)
+		sword.action(direction)
+		last_held_item = held_item
 		held_item = ENUMS.HELD_ITEM.NONE

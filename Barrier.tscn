@@ -6,7 +6,7 @@
 size = Vector2(8, 8)
 
 [node name="Barrier" type="CharacterBody2D"]
-collision_mask = 3
+collision_mask = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(4, 4)

@@ -12,6 +12,7 @@ metadata/_edit_horizontal_guides_ = [0.0]
 [node name="L-Side-Wall" parent="." instance=ExtResource("2_qj3co")]
 position = Vector2(-64, 0)
 scale = Vector2(8, 135)
+collision_mask = 0
 
 [node name="R-Side-Wall" parent="." instance=ExtResource("2_qj3co")]
 position = Vector2(1920, 0)
@@ -22,6 +23,7 @@ position = Vector2(0, 960)
 scale = Vector2(240, 7)
 
 [node name="Player1" parent="." instance=ExtResource("3_dbffi")]
+modulate = Color(0, 0, 0, 1)
 position = Vector2(0, 896)
 direction = 1
 held_item = 1
@@ -31,11 +33,11 @@ position = Vector2(1856, 896)
 held_item = 2
 
 [node name="Sword1" parent="." instance=ExtResource("4_2fpqd")]
-position = Vector2(48, 832)
+position = Vector2(56, 840)
 state = 2
 
 [node name="Sword2" parent="." instance=ExtResource("4_2fpqd")]
-position = Vector2(1856, 832)
+position = Vector2(1848, 840)
 state = 2
 
 [node name="Button1" type="Button" parent="."]

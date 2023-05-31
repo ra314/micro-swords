@@ -10,10 +10,10 @@ size = Vector2(64, 64)
 collision_layer = 2
 script = ExtResource("1_y0qsv")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(32, 32)
-shape = SubResource("RectangleShape2D_mclpc")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(32, 32)
 texture = ExtResource("1_wpvrv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_mclpc")
