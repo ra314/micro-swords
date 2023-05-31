@@ -6,6 +6,7 @@ const THROW_ANGLE = 45 # Measured from the floor
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var state: ENUMS.SWORD_STATE
+@export var sword_name: ENUMS.HELD_ITEM
 var direction: ENUMS.DIRECTION
 var hor_speed: float
 
@@ -30,9 +31,19 @@ func _physics_process(delta):
 			else:
 				velocity.x = -hor_speed
 			velocity.y += gravity * delta
+			
+			# MOVE
 			move_and_slide()
+			detect_swordsman_collision()
+	
 	elif state == ENUMS.SWORD_STATE.HELD:
 		position += (velocity*delta)
+
+func detect_swordsman_collision():
+	for i in get_slide_collision_count():
+		var collider = get_slide_collision(i).get_collider()
+		if collider.name == "Black" or collider.name == "Blue":
+			collider.respond_to_collision(self)
 
 func action(_direction: ENUMS.DIRECTION):
 	direction = _direction
@@ -44,3 +55,6 @@ func action(_direction: ENUMS.DIRECTION):
 	if direction == ENUMS.DIRECTION.LEFT:
 		velocity.x *= -1
 	state = ENUMS.SWORD_STATE.THROWN
+
+func die():
+	queue_free()

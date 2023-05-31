@@ -22,23 +22,27 @@ scale = Vector2(8, 135)
 position = Vector2(0, 960)
 scale = Vector2(240, 7)
 
-[node name="Player1" parent="." instance=ExtResource("3_dbffi")]
+[node name="Black" parent="." instance=ExtResource("3_dbffi")]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(0, 896)
 direction = 1
 held_item = 1
 
-[node name="Player2" parent="." instance=ExtResource("3_dbffi")]
+[node name="Blue" parent="." instance=ExtResource("3_dbffi")]
 position = Vector2(1856, 896)
 held_item = 2
 
 [node name="Sword1" parent="." instance=ExtResource("4_2fpqd")]
 position = Vector2(56, 840)
+collision_layer = 4
 state = 2
+sword_name = 1
 
 [node name="Sword2" parent="." instance=ExtResource("4_2fpqd")]
 position = Vector2(1848, 840)
+collision_layer = 8
 state = 2
+sword_name = 2
 
 [node name="Button1" type="Button" parent="."]
 offset_right = 64.0

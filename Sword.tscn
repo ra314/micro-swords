@@ -8,7 +8,7 @@ size = Vector2(64, 64)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(0.25, 1)
-collision_layer = 4
+collision_layer = 0
 script = ExtResource("1_46w4d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
