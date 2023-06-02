@@ -17,15 +17,6 @@ func _ready():
 func collision_layer():
 	return ConstData.SWORDSMAN_TO_COLLISION_LAYER[swordsman_name]
 
-func other_swordsman_name() -> ENUMS.SWORDSMAN:
-	match swordsman_name:
-		ENUMS.SWORDSMAN.BLACK:
-			return ENUMS.SWORDSMAN.BLUE
-		ENUMS.SWORDSMAN.BLUE:
-			return ENUMS.SWORDSMAN.BLACK
-	assert(false)
-	return ENUMS.SWORDSMAN.BLACK
-
 func update_held_sword_location(sword: Sword):
 	sword.position = position-ConstData.DIR_TO_RELATIVE_SWORD_POS[direction]
 
@@ -84,6 +75,7 @@ func die():
 	queue_free()
 	if held_item != ENUMS.HELD_ITEM.NONE:
 		root.get_sword(held_item).die()
+	root.died(swordsman_name)
 
 func pickup_sword(sword: Sword):
 	held_item = sword.sword_name

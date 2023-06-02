@@ -57,3 +57,19 @@ offset_bottom = 64.0
 offset_left = 1856.0
 offset_right = 1920.0
 offset_bottom = 64.0
+
+[node name="BlackScore" type="Label" parent="."]
+offset_left = 576.0
+offset_top = 64.0
+offset_right = 633.0
+offset_bottom = 204.0
+theme_override_font_sizes/font_size = 100
+text = "0"
+
+[node name="BlueScore" type="Label" parent="."]
+offset_left = 1288.0
+offset_top = 64.0
+offset_right = 1345.0
+offset_bottom = 204.0
+theme_override_font_sizes/font_size = 100
+text = "0"
