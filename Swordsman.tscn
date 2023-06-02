@@ -10,6 +10,9 @@ size = Vector2(64, 64)
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_y0qsv")
+direction = null
+held_item = null
+swordsman_name = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(32, 32)

@@ -140,5 +140,5 @@ func action():
 		held_item = ENUMS.HELD_ITEM.NONE
 		
 		# Perform throw
-		sword.action(direction)
+		sword.action(direction, rot_deg)
 		$Arrow.visible = false

@@ -28,10 +28,12 @@ modulate = Color(0, 0, 0, 1)
 position = Vector2(0, 896)
 direction = 1
 held_item = 1
+swordsman_name = null
 
 [node name="Blue" parent="." instance=ExtResource("3_dbffi")]
 position = Vector2(1856, 896)
 collision_layer = 4
+direction = null
 held_item = 2
 swordsman_name = 1
 

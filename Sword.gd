@@ -1,8 +1,7 @@
 extends CharacterBody2D
 class_name Sword
 
-const THROW_SPEED = 600.0
-const THROW_ANGLE = 45 # Measured from the floor
+const THROW_SPEED = 1200.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var state: ENUMS.SWORD_STATE
@@ -59,11 +58,11 @@ func become_grounded():
 	# Enable collision with swordsman to allow for pickup
 	root.update_collision_between_grounded_swords_and_empty_swordsmen()
 
-func action(_direction: ENUMS.DIRECTION):
+func action(_direction: ENUMS.DIRECTION, rot_deg: int):
 	direction = _direction
 	assert(state == ENUMS.SWORD_STATE.HELD)
-	var new_y = sin(deg_to_rad(THROW_ANGLE))*THROW_SPEED
-	var new_x = cos(deg_to_rad(THROW_ANGLE))*THROW_SPEED
+	var new_y = sin(deg_to_rad(rot_deg))*THROW_SPEED
+	var new_x = cos(deg_to_rad(rot_deg))*THROW_SPEED
 	hor_speed = new_x+abs(velocity.x)
 	velocity = Vector2(new_x+abs(velocity.x), -new_y)
 	if direction == ENUMS.DIRECTION.LEFT:
