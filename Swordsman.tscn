@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccbd5rrosfsx8"]
+[gd_scene load_steps=5 format=3 uid="uid://ccbd5rrosfsx8"]
 
 [ext_resource type="Texture2D" uid="uid://di23j62yi08gc" path="res://blue-square.svg" id="1_wpvrv"]
 [ext_resource type="Script" path="res://Swordsman.gd" id="1_y0qsv"]
+[ext_resource type="Texture2D" uid="uid://do2dt6u6j3ld0" path="res://arrow-next-right2.png" id="3_4kvfh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mclpc"]
 size = Vector2(64, 64)
@@ -17,3 +18,9 @@ texture = ExtResource("1_wpvrv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_mclpc")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+rotation = 3.11192
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("3_4kvfh")

@@ -69,7 +69,6 @@ func action(_direction: ENUMS.DIRECTION):
 	if direction == ENUMS.DIRECTION.LEFT:
 		velocity.x *= -1
 	state = ENUMS.SWORD_STATE.THROWN
-	print(velocity)
 
 func die():
 	queue_free()

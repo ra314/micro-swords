@@ -1,8 +1,14 @@
 extends CharacterBody2D
 class_name Swordsman
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const SPEED := 300.0
+const JUMP_VELOCITY := -400.0
+
+const MAX_ROT_RANGE_DEG := 120
+const ROT_SPEED := 3
+var rot_deg := 0
+var rotating_upwards := true
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var direction: ENUMS.DIRECTION
@@ -13,6 +19,24 @@ var root: Root
 
 func _ready():
 	root = get_parent()
+	update_arrow_rotation()
+
+func update_arrow_rotation():
+	match direction:
+		ENUMS.DIRECTION.RIGHT:
+			$Arrow.rotation_degrees = -rot_deg
+		ENUMS.DIRECTION.LEFT:
+			$Arrow.rotation_degrees = -180+rot_deg
+		_:
+			assert(false)
+
+func rotate_arrow():
+	if rotating_upwards:
+		rot_deg += ROT_SPEED
+	else:
+		rot_deg -= ROT_SPEED
+	if rot_deg >= 120 or rot_deg <= 0:
+		rotating_upwards = not rotating_upwards
 
 func collision_layer():
 	return ConstData.SWORDSMAN_TO_COLLISION_LAYER[swordsman_name]
@@ -30,10 +54,12 @@ func _physics_process(delta):
 		direction = ENUMS.DIRECTION.RIGHT
 		if held_item != ENUMS.HELD_ITEM.NONE:
 			update_held_sword_location(root.get_sword(held_item))
+		update_arrow_rotation()
 	elif Utils.approx_equal(position.x, 1920-64):
 		direction = ENUMS.DIRECTION.LEFT
 		if held_item != ENUMS.HELD_ITEM.NONE:
 			update_held_sword_location(root.get_sword(held_item))
+		update_arrow_rotation()
 	
 	# Set velocity based on direction
 	if direction == ENUMS.DIRECTION.RIGHT:
@@ -41,9 +67,12 @@ func _physics_process(delta):
 	else:
 		velocity.x = -SPEED
 	
-	# Sync sword velocity with swordsman velocity
 	if held_item != ENUMS.HELD_ITEM.NONE:
+		# Sync sword velocity with swordsman velocity
 		root.get_sword(held_item).velocity = velocity
+		# Rotate the arrow
+		rotate_arrow()
+		update_arrow_rotation()
 	
 	# MOVE
 	move_and_slide()
@@ -83,6 +112,14 @@ func pickup_sword(sword: Sword):
 	root.update_collision_between_grounded_swords_and_empty_swordsmen()
 	sword.state = ENUMS.SWORD_STATE.HELD
 	sword.direction = direction
+	$Arrow.visible = true
+	match direction:
+		ENUMS.DIRECTION.RIGHT:
+			$Arrow.rotation_degrees = 0
+		ENUMS.DIRECTION.LEFT:
+			$Arrow.rotation_degrees = -180
+		_:
+			assert(false)
 
 func action():
 	# JUMP
@@ -104,3 +141,4 @@ func action():
 		
 		# Perform throw
 		sword.action(direction)
+		$Arrow.visible = false
