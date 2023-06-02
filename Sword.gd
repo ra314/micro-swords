@@ -29,7 +29,7 @@ func _physics_process(delta):
 			# Handle switching directions
 			if Utils.approx_equal(position.x, 0):
 				direction = ENUMS.DIRECTION.RIGHT
-			elif Utils.approx_equal(position.x, 1920-64):
+			elif Utils.approx_equal(position.x, 1920-16):
 				direction = ENUMS.DIRECTION.LEFT
 			
 			# Set velocity based on direction
@@ -41,6 +41,9 @@ func _physics_process(delta):
 	
 	elif state == ENUMS.SWORD_STATE.HELD:
 		position += (velocity*delta)
+	
+	if name == "Sword1":
+		print(position)
 
 func detect_swordsman_collision():
 	for i in get_slide_collision_count():

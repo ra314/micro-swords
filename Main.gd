@@ -59,13 +59,3 @@ func update_collision_between_grounded_swords_and_empty_swordsmen():
 			if sword.state == ENUMS.SWORD_STATE.GROUNDED:
 				var enable_collision = swordsman.held_item == ENUMS.HELD_ITEM.NONE
 				swordsman.set_collision_mask_value(sword.collision_layer(), enable_collision)
-
-func debug_collision_print():
-	print($Black.collision_mask)
-	print($Blue.collision_mask)
-	print($Sword1.collision_mask)
-	print($Sword2.collision_mask)
-	print($Black.held_item)
-	print($Blue.held_item)
-	print($Sword1.state)
-	print($Sword2.state)

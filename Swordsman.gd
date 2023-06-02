@@ -112,8 +112,3 @@ func action():
 		
 		# Perform throw
 		sword.action(direction)
-		sword.position.y -= 30
-		sword.position.x += 30
-		
-		root.debug_collision_print()
-
