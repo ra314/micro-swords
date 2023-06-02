@@ -88,9 +88,9 @@ func die():
 func pickup_sword(sword: Sword):
 	held_item = sword.sword_name
 	update_held_sword_location(sword)
+	root.update_collision_between_grounded_swords_and_empty_swordsmen()
 	sword.state = ENUMS.SWORD_STATE.HELD
 	sword.direction = direction
-	root.update_collision_between_grounded_swords_and_empty_swordsmen()
 
 func action():
 	# JUMP
@@ -112,6 +112,8 @@ func action():
 		
 		# Perform throw
 		sword.action(direction)
+		sword.position.y -= 30
+		sword.position.x += 30
 		
 		root.debug_collision_print()
 

@@ -65,5 +65,7 @@ func debug_collision_print():
 	print($Blue.collision_mask)
 	print($Sword1.collision_mask)
 	print($Sword2.collision_mask)
-	
-	print("THU")
+	print($Black.held_item)
+	print($Blue.held_item)
+	print($Sword1.state)
+	print($Sword2.state)
