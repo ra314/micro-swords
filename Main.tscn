@@ -94,8 +94,8 @@ position = Vector2(1568, 784)
 scale = Vector2(44, 4.4)
 
 [node name="Platform3" parent="." instance=ExtResource("5_dy1bx")]
-position = Vector2(1376, 664)
-scale = Vector2(48, 4)
+position = Vector2(1432, 664)
+scale = Vector2(45, 4)
 
 [node name="Platform4" parent="." instance=ExtResource("5_dy1bx")]
 position = Vector2(1488, 472)
@@ -111,7 +111,7 @@ scale = Vector2(39, 4)
 
 [node name="Platform7" parent="." instance=ExtResource("5_dy1bx")]
 position = Vector2(984, 520)
-scale = Vector2(46, 4)
+scale = Vector2(40, 4)
 
 [node name="Platform8" parent="." instance=ExtResource("5_dy1bx")]
 position = Vector2(656, 392)

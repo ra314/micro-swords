@@ -1,9 +1,9 @@
 extends CharacterBody2D
 class_name Sword
 
-const THROW_SPEED = 1200.0
+# Top height for a 90 degree throw should be 5 body heights
+const THROW_SPEED = 1700
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var state: ENUMS.SWORD_STATE
 @export var sword_name: ENUMS.HELD_ITEM
 var direction: ENUMS.DIRECTION
@@ -36,7 +36,9 @@ func _physics_process(delta):
 				velocity.x = hor_speed
 			else:
 				velocity.x = -hor_speed
-			velocity.y += gravity * delta
+			velocity.y += ConstData.GRAVITY * delta
+#			if velocity.y > 0:
+#				print("hello")
 	
 	elif state == ENUMS.SWORD_STATE.HELD:
 		position += (velocity*delta)

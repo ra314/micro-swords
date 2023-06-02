@@ -1,9 +1,10 @@
 extends CharacterBody2D
 class_name Swordsman
 
+# 4 bodylengths per second
 const SPEED := 64*4
 # Max jump height needs to be 3 times character height
-const JUMP_VELOCITY := -605.0
+const JUMP_VELOCITY := -1540
 
 const MAX_ROT_RANGE_DEG := 120
 const ROT_SPEED := 4
@@ -11,16 +12,17 @@ var rot_deg := 0
 var rotating_upwards := true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var direction: ENUMS.DIRECTION
 @export var held_item: ENUMS.HELD_ITEM
 @export var swordsman_name: ENUMS.SWORDSMAN
 var last_held_item: ENUMS.HELD_ITEM
 var root: Root
 
+#var debug_orig_y
 func _ready():
 	root = get_parent()
 	update_arrow_rotation()
+#	debug_orig_y = position.y
 
 func update_arrow_rotation():
 	match direction:
@@ -48,7 +50,10 @@ func update_held_sword_location(sword: Sword):
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		velocity.y += ConstData.GRAVITY * delta
+#		if velocity.y > 0:
+#			print(debug_orig_y-position.y)
+#			print("hello")
 	
 	# Handle switching directions
 	if Utils.approx_equal(position.x, 488):
@@ -74,6 +79,8 @@ func _physics_process(delta):
 		# Rotate the arrow
 		rotate_arrow()
 		update_arrow_rotation()
+#		if rot_deg == 92:
+#			action()
 	
 	# MOVE
 	move_and_slide()
