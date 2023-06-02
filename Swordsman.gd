@@ -14,6 +14,18 @@ var root: Root
 func _ready():
 	root = get_parent()
 
+func collision_layer():
+	return ConstData.SWORDSMAN_TO_COLLISION_LAYER[swordsman_name]
+
+func other_swordsman_name() -> ENUMS.SWORDSMAN:
+	match swordsman_name:
+		ENUMS.SWORDSMAN.BLACK:
+			return ENUMS.SWORDSMAN.BLUE
+		ENUMS.SWORDSMAN.BLUE:
+			return ENUMS.SWORDSMAN.BLACK
+	assert(false)
+	return ENUMS.SWORDSMAN.BLACK
+
 func update_held_sword_location(sword: Sword):
 	sword.position = position-ConstData.DIR_TO_RELATIVE_SWORD_POS[direction]
 
@@ -25,10 +37,12 @@ func _physics_process(delta):
 	# Handle switching directions
 	if Utils.approx_equal(position.x, 0):
 		direction = ENUMS.DIRECTION.RIGHT
-		update_held_sword_location(root.get_sword(held_item))
+		if held_item != ENUMS.HELD_ITEM.NONE:
+			update_held_sword_location(root.get_sword(held_item))
 	elif Utils.approx_equal(position.x, 1920-64):
 		direction = ENUMS.DIRECTION.LEFT
-		update_held_sword_location(root.get_sword(held_item))
+		if held_item != ENUMS.HELD_ITEM.NONE:
+			update_held_sword_location(root.get_sword(held_item))
 	
 	# Set velocity based on direction
 	if direction == ENUMS.DIRECTION.RIGHT:
@@ -76,11 +90,7 @@ func pickup_sword(sword: Sword):
 	update_held_sword_location(sword)
 	sword.state = ENUMS.SWORD_STATE.HELD
 	sword.direction = direction
-	# Dsiable collision
-	sword.set_collision_mask_value(ENUMS.COLLISION_LAYER.FLOOR, false)
-	sword.set_collision_mask_value(ENUMS.COLLISION_LAYER.SWORDSMAN, false)
-	root.get_swordsman(ENUMS.SWORDSMAN.BLACK).set_collision_mask_value(sword.collision_layer(), false)
-	root.get_swordsman(ENUMS.SWORDSMAN.BLUE).set_collision_mask_value(sword.collision_layer(), false)
+	root.update_collision_between_grounded_swords_and_empty_swordsmen()
 
 func action():
 	# JUMP
@@ -92,14 +102,16 @@ func action():
 		var other_swordsman := root.get_other_swordsman(swordsman_name)
 		var sword: Sword = root.get_sword(held_item)
 		
-		# Enable relevant collisions
-		sword.set_collision_mask_value(ENUMS.COLLISION_LAYER.FLOOR, true)
-		sword.set_collision_mask_value(ENUMS.COLLISION_LAYER.SWORDSMAN, true)
-		other_swordsman.set_collision_mask_value(sword.collision_layer(), true)
-		
+		# Enable collision with other swordsman
+		sword.set_collision_mask_value(other_swordsman.collision_layer(), true)
+		# Enable pickup of grounded swords
+		root.update_collision_between_grounded_swords_and_empty_swordsmen()
 		# Update held item
 		last_held_item = held_item
 		held_item = ENUMS.HELD_ITEM.NONE
 		
 		# Perform throw
 		sword.action(direction)
+		
+		root.debug_collision_print()
+

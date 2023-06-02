@@ -14,12 +14,16 @@ func get_sword(item: ENUMS.HELD_ITEM) -> Sword:
 	assert(false)
 	return null
 
-func get_other_sword(sword: ENUMS.HELD_ITEM) -> Sword:
-	var swords = ENUMS.HELD_ITEM.values()
-	swords.erase(ENUMS.HELD_ITEM.NONE)
-	swords.erase(sword)
-	assert(len(swords)==1)
-	return swords[0]
+func get_swords() -> Array:
+	return [$Sword1, $Sword2]
+
+func get_other_sword(item: ENUMS.HELD_ITEM) -> Sword:
+	if item == ENUMS.HELD_ITEM.SWORD_1:
+		return $Sword2
+	if item == ENUMS.HELD_ITEM.SWORD_2:
+		return $Sword1
+	assert(false)
+	return null
 
 func get_swordsman(man: ENUMS.SWORDSMAN) -> Swordsman:
 	if man == ENUMS.SWORDSMAN.BLACK:
@@ -29,11 +33,16 @@ func get_swordsman(man: ENUMS.SWORDSMAN) -> Swordsman:
 	assert(false)
 	return null
 
+func get_swordsmen() -> Array:
+	return [$Black, $Blue]
+
 func get_other_swordsman(man: ENUMS.SWORDSMAN) -> Swordsman:
-	var swordsmen = ENUMS.SWORDSMAN.values()
-	swordsmen.erase(man)
-	assert(len(swordsmen)==1)
-	return get_swordsman(swordsmen[0])
+	if man == ENUMS.SWORDSMAN.BLACK:
+		return $Blue
+	if man == ENUMS.SWORDSMAN.BLUE:
+		return $Black
+	assert(false)
+	return null
 
 func get_holder(sword: ENUMS.HELD_ITEM) -> Swordsman:
 	assert(sword != ENUMS.HELD_ITEM.NONE)
@@ -43,3 +52,18 @@ func get_holder(sword: ENUMS.HELD_ITEM) -> Swordsman:
 		return $Blue
 	assert(false)
 	return null
+
+func update_collision_between_grounded_swords_and_empty_swordsmen():
+	for swordsman in get_swordsmen():
+		for sword in get_swords():
+			if sword.state == ENUMS.SWORD_STATE.GROUNDED:
+				var enable_collision = swordsman.held_item == ENUMS.HELD_ITEM.NONE
+				swordsman.set_collision_mask_value(sword.collision_layer(), enable_collision)
+
+func debug_collision_print():
+	print($Black.collision_mask)
+	print($Blue.collision_mask)
+	print($Sword1.collision_mask)
+	print($Sword2.collision_mask)
+	
+	print("THU")

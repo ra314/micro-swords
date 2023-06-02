@@ -51,11 +51,13 @@ func detect_swordsman_collision():
 func become_grounded():
 	state = ENUMS.SWORD_STATE.GROUNDED
 	velocity = Vector2(0,0)
-	set_collision_mask_value(ENUMS.COLLISION_LAYER.SWORDSMAN, false)
-	for swordsman_enum in ENUMS.SWORDSMAN.values():
-		var swordsman := root.get_swordsman(swordsman_enum)
-		var enable_collision = swordsman.held_item == ENUMS.HELD_ITEM.NONE
-		swordsman.set_collision_mask_value(collision_layer(), enable_collision)
+	# Swords shouldn't collide into swordsmen, it should be the other way around.
+	# Since the sword is stationary after it is grounded. Only the swordsman will
+	# be able to detect the collision.
+	set_collision_mask_value(ENUMS.COLLISION_LAYER.BLACK, false)
+	set_collision_mask_value(ENUMS.COLLISION_LAYER.BLUE, false)
+	# Enable collision with swordsman to allow for pickup
+	root.update_collision_between_grounded_swords_and_empty_swordsmen()
 
 func action(_direction: ENUMS.DIRECTION):
 	direction = _direction

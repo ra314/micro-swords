@@ -21,6 +21,7 @@ scale = Vector2(8, 135)
 [node name="Floor" parent="." instance=ExtResource("2_qj3co")]
 position = Vector2(0, 960)
 scale = Vector2(240, 7)
+collision_mask = 31
 
 [node name="Black" parent="." instance=ExtResource("3_dbffi")]
 modulate = Color(0, 0, 0, 1)
@@ -30,17 +31,21 @@ held_item = 1
 
 [node name="Blue" parent="." instance=ExtResource("3_dbffi")]
 position = Vector2(1856, 896)
+collision_layer = 4
 held_item = 2
+swordsman_name = 1
 
 [node name="Sword1" parent="." instance=ExtResource("4_2fpqd")]
 position = Vector2(56, 840)
-collision_layer = 4
+collision_layer = 8
+collision_mask = 1
 state = 2
 sword_name = 1
 
 [node name="Sword2" parent="." instance=ExtResource("4_2fpqd")]
 position = Vector2(1848, 840)
-collision_layer = 8
+collision_layer = 16
+collision_mask = 1
 state = 2
 sword_name = 2
 
