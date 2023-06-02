@@ -1,11 +1,12 @@
 extends CharacterBody2D
 class_name Swordsman
 
-const SPEED := 300.0
-const JUMP_VELOCITY := -400.0
+const SPEED := 64*4
+# Max jump height needs to be 3 times character height
+const JUMP_VELOCITY := -605.0
 
 const MAX_ROT_RANGE_DEG := 120
-const ROT_SPEED := 3
+const ROT_SPEED := 4
 var rot_deg := 0
 var rotating_upwards := true
 
@@ -50,12 +51,12 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	
 	# Handle switching directions
-	if Utils.approx_equal(position.x, 0):
+	if Utils.approx_equal(position.x, 488):
 		direction = ENUMS.DIRECTION.RIGHT
 		if held_item != ENUMS.HELD_ITEM.NONE:
 			update_held_sword_location(root.get_sword(held_item))
 		update_arrow_rotation()
-	elif Utils.approx_equal(position.x, 1920-64):
+	elif Utils.approx_equal(position.x, 1920-96):
 		direction = ENUMS.DIRECTION.LEFT
 		if held_item != ENUMS.HELD_ITEM.NONE:
 			update_held_sword_location(root.get_sword(held_item))

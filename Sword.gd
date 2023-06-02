@@ -26,7 +26,7 @@ func _physics_process(delta):
 			become_grounded()
 		else:
 			# Handle switching directions
-			if Utils.approx_equal(position.x, 0):
+			if Utils.approx_equal(position.x, 488):
 				direction = ENUMS.DIRECTION.RIGHT
 			elif Utils.approx_equal(position.x, 1920-16):
 				direction = ENUMS.DIRECTION.LEFT
@@ -63,8 +63,8 @@ func action(_direction: ENUMS.DIRECTION, rot_deg: int):
 	assert(state == ENUMS.SWORD_STATE.HELD)
 	var new_y = sin(deg_to_rad(rot_deg))*THROW_SPEED
 	var new_x = cos(deg_to_rad(rot_deg))*THROW_SPEED
-	hor_speed = new_x+abs(velocity.x)
-	velocity = Vector2(new_x+abs(velocity.x), -new_y)
+	hor_speed = new_x
+	velocity = Vector2(new_x, -new_y)
 	if direction == ENUMS.DIRECTION.LEFT:
 		velocity.x *= -1
 	state = ENUMS.SWORD_STATE.THROWN
