@@ -19,6 +19,10 @@ func collision_layer():
 
 func _physics_process(delta):
 	if state == ENUMS.SWORD_STATE.THROWN:
+		# MOVE
+		move_and_slide()
+		detect_swordsman_collision()
+		
 		if is_on_floor():
 			become_grounded()
 		else:
@@ -34,16 +38,9 @@ func _physics_process(delta):
 			else:
 				velocity.x = -hor_speed
 			velocity.y += gravity * delta
-			
-			# MOVE
-			move_and_slide()
-			detect_swordsman_collision()
 	
 	elif state == ENUMS.SWORD_STATE.HELD:
 		position += (velocity*delta)
-	
-	if name == "Sword1":
-		print(velocity)
 
 func detect_swordsman_collision():
 	for i in get_slide_collision_count():
