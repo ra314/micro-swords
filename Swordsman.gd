@@ -14,6 +14,9 @@ var root: Root
 func _ready():
 	root = get_parent()
 
+func update_held_sword_location(sword: Sword):
+	sword.position = position-ConstData.DIR_TO_RELATIVE_SWORD_POS[direction]
+
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
@@ -22,8 +25,10 @@ func _physics_process(delta):
 	# Handle switching directions
 	if Utils.approx_equal(position.x, 0):
 		direction = ENUMS.DIRECTION.RIGHT
+		update_held_sword_location(root.get_sword(held_item))
 	elif Utils.approx_equal(position.x, 1920-64):
 		direction = ENUMS.DIRECTION.LEFT
+		update_held_sword_location(root.get_sword(held_item))
 	
 	# Set velocity based on direction
 	if direction == ENUMS.DIRECTION.RIGHT:
@@ -68,9 +73,14 @@ func die():
 
 func pickup_sword(sword: Sword):
 	held_item = sword.sword_name
-	sword.position = position-ConstData.DIR_TO_RELATIVE_SWORD_POS[direction]
+	update_held_sword_location(sword)
 	sword.state = ENUMS.SWORD_STATE.HELD
 	sword.direction = direction
+	# Dsiable collision
+	sword.set_collision_mask_value(ENUMS.COLLISION_LAYER.FLOOR, false)
+	sword.set_collision_mask_value(ENUMS.COLLISION_LAYER.SWORDSMAN, false)
+	root.get_swordsman(ENUMS.SWORDSMAN.BLACK).set_collision_mask_value(sword.collision_layer(), false)
+	root.get_swordsman(ENUMS.SWORDSMAN.BLUE).set_collision_mask_value(sword.collision_layer(), false)
 
 func action():
 	# JUMP
