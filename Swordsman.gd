@@ -75,7 +75,7 @@ func _physics_process(delta):
 	
 	if held_item != ENUMS.HELD_ITEM.NONE:
 		# Sync sword velocity with swordsman velocity
-		root.get_sword(held_item).velocity = velocity
+		update_held_sword_location(root.get_sword(held_item))
 		# Rotate the arrow
 		rotate_arrow()
 		update_arrow_rotation()
@@ -83,14 +83,23 @@ func _physics_process(delta):
 #			action()
 	
 	# MOVE
+	var prev_position = position
+	var prev_velocity = velocity
 	move_and_slide()
-	detect_sword_collision()
+	var collided_with_sword = detect_sword_collision()
+	if collided_with_sword:
+		position = prev_position
+		velocity = prev_velocity
+		move_and_slide()
 
-func detect_sword_collision():
+func detect_sword_collision() -> bool:
+	var retval = false
 	for i in get_slide_collision_count():
 		var collider = get_slide_collision(i).get_collider()
 		if collider.name.contains("Sword"):
 			respond_to_collision(collider)
+			retval = true
+	return retval
 
 func respond_to_collision(sword: Sword):
 	match sword.state:

@@ -41,7 +41,7 @@ func _physics_process(delta):
 #				print("hello")
 	
 	elif state == ENUMS.SWORD_STATE.HELD:
-		position += (velocity*delta)
+		pass
 
 func detect_swordsman_collision():
 	for i in get_slide_collision_count():
