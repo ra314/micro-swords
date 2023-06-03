@@ -10,6 +10,19 @@ var direction: ENUMS.DIRECTION
 var hor_speed: float
 var root: Root
 
+func init(_direction: ENUMS.DIRECTION, _sword_name: ENUMS.HELD_ITEM, _state: ENUMS.SWORD_STATE):
+	direction = _direction
+	sword_name = _sword_name
+	state = _state
+	match sword_name:
+		ENUMS.HELD_ITEM.SWORD_1:
+			name = "Sword1"
+		ENUMS.HELD_ITEM.SWORD_2:
+			name = "Sword2"
+		_:
+			assert(false)
+	return self
+
 func _ready():
 	root = get_parent()
 

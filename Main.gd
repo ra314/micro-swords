@@ -1,6 +1,7 @@
 extends Node2D
 class_name Root
 var score := {ENUMS.SWORDSMAN.BLACK: 0, ENUMS.SWORDSMAN.BLUE: 0}
+const RESET_PAUSE_TIME = 3.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,6 +41,13 @@ func get_other_swordsman(man: ENUMS.SWORDSMAN) -> Swordsman:
 		return $Black
 	assert(false)
 	return null
+func get_other_swordsman_name(man: ENUMS.SWORDSMAN) -> ENUMS.SWORDSMAN:
+	if man == ENUMS.SWORDSMAN.BLACK:
+		return ENUMS.SWORDSMAN.BLUE
+	if man == ENUMS.SWORDSMAN.BLUE:
+		return ENUMS.SWORDSMAN.BLACK
+	assert(false)
+	return ENUMS.SWORDSMAN.BLUE
 
 func collide(swordsman: Swordsman, sword: Sword, enable: bool):
 	swordsman.set_collision_mask_value(sword.collision_layer(), enable)
@@ -79,9 +87,34 @@ func update_collision_between_grounded_swords_and_empty_swordsmen():
 			if sword.state == ENUMS.SWORD_STATE.GROUNDED:
 				var enable_collision = swordsman.held_item == ENUMS.HELD_ITEM.NONE
 				swordsman.set_collision_mask_value(sword.collision_layer(), enable_collision)
+
 func died(man: ENUMS.SWORDSMAN):
-	score[get_other_swordsman(man).swordsman_name] += 1
+	score[get_other_swordsman_name(man)] += 1
 	update_ui()
+	# If both players die within RESET_PAUSE_TIME,
+	# we don't want reset to be called twice.
+	if resetting: return
+	get_tree().create_timer(RESET_PAUSE_TIME).timeout.connect(reset)
+	resetting = true
 func update_ui():
 	$BlackScore.text = str(score[ENUMS.SWORDSMAN.BLACK])
 	$BlueScore.text = str(score[ENUMS.SWORDSMAN.BLUE])
+var resetting := false
+func reset():
+	if has_node("Black"):
+		$Black.queue_free()
+	if has_node("Blue"):
+		$Blue.queue_free()
+	if has_node("Sword1"):
+		$Sword1.queue_free()
+	if has_node("Sword2"):
+		$Sword2.queue_free()
+	var black = load("res://Swordsman.tscn").instantiate().init(ENUMS.DIRECTION.RIGHT, ENUMS.SWORDSMAN.BLACK, ENUMS.HELD_ITEM.SWORD_1)
+	var blue = load("res://Swordsman.tscn").instantiate().init(ENUMS.DIRECTION.LEFT, ENUMS.SWORDSMAN.BLUE, ENUMS.HELD_ITEM.SWORD_2)
+	var sword1 = load("res://Sword.tscn").instantiate().init(ENUMS.DIRECTION.RIGHT, ENUMS.HELD_ITEM.SWORD_1, ENUMS.SWORD_STATE.HELD)
+	var sword2 = load("res://Sword.tscn").instantiate().init(ENUMS.DIRECTION.LEFT, ENUMS.HELD_ITEM.SWORD_2, ENUMS.SWORD_STATE.HELD)
+	add_child(sword1)
+	add_child(sword2)
+	add_child(black)
+	add_child(blue)
+	resetting = false

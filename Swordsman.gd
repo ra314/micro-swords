@@ -18,10 +18,28 @@ var rotating_upwards := true
 var last_held_item: ENUMS.HELD_ITEM
 var root: Root
 
+func init(_direction: ENUMS.DIRECTION, _swordsman_name: ENUMS.SWORDSMAN, _held_item: ENUMS.HELD_ITEM):
+	direction = _direction
+	held_item = _held_item
+	swordsman_name = _swordsman_name
+	match swordsman_name:
+		ENUMS.SWORDSMAN.BLACK:
+			name = "Black"
+			position = Vector2(488, 864)
+			modulate = Color(0, 0, 0, 1)
+		ENUMS.SWORDSMAN.BLUE:
+			name = "Blue"
+			position = Vector2(1824, 864)
+		_:
+			assert(false)
+	return self
+
 #var debug_orig_y
 func _ready():
 	root = get_parent()
+	scale = Vector2(1.5, 1.5)
 	update_arrow_rotation()
+	update_held_sword_location(root.get_sword(held_item))
 #	debug_orig_y = position.y
 
 func update_arrow_rotation():
@@ -87,11 +105,15 @@ func _physics_process(delta):
 	var prev_velocity = velocity
 	move_and_slide()
 	var collided_with_sword = detect_sword_collision()
+	# Kludge to prevent drop in velocity when jumping onto a grounded sword.
 	if collided_with_sword:
 		position = prev_position
 		velocity = prev_velocity
 		move_and_slide()
-	print(name, velocity)
+	
+	if Input.is_action_just_released("ui_accept"):
+		if name == "Black":
+			action()
 
 func detect_sword_collision() -> bool:
 	var retval = false
