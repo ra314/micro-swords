@@ -41,6 +41,38 @@ func get_other_swordsman(man: ENUMS.SWORDSMAN) -> Swordsman:
 	assert(false)
 	return null
 
+func collide(swordsman: Swordsman, sword: Sword, enable: bool):
+	swordsman.set_collision_mask_value(sword.collision_layer(), enable)
+
+func update_collision_between_swords_and_swordsmen():
+	for swordsman in get_swordsmen():
+		for sword in get_swords():
+			match sword.state:
+				# If a sword is being held, you should never be able to 
+				# collide with it.
+				ENUMS.SWORD_STATE.HELD:
+					collide(swordsman, sword, false)
+				ENUMS.SWORD_STATE.THROWN:
+					# Don't collide with a sword you've thrown if it's mid air
+					if swordsman.last_held_item == sword.sword_name:
+						collide(swordsman, sword, false)
+					# Only collide if you're not the one that threw the sword
+					else:
+						collide(swordsman, sword, true)
+				ENUMS.SWORD_STATE.GROUNDED:
+					if swordsman.held_item == ENUMS.HELD_ITEM.NONE:
+						# If you're not holding anything, you need to collide
+						# with grounded swords to be able to pick it up
+						collide(swordsman, sword, true)
+					elif swordsman.held_item in {ENUMS.HELD_ITEM.SWORD_1:1, ENUMS.HELD_ITEM.SWORD_2:1}:
+						# If you're already holding a sword, then you can't
+						# pick up a grounded sword
+						collide(swordsman, sword, false)
+					else:
+						assert(false)
+				_:
+					assert(false)
+
 func update_collision_between_grounded_swords_and_empty_swordsmen():
 	for swordsman in get_swordsmen():
 		for sword in get_swords():

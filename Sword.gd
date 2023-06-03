@@ -58,7 +58,7 @@ func become_grounded():
 	set_collision_mask_value(ENUMS.COLLISION_LAYER.BLACK, false)
 	set_collision_mask_value(ENUMS.COLLISION_LAYER.BLUE, false)
 	# Enable collision with swordsman to allow for pickup
-	root.update_collision_between_grounded_swords_and_empty_swordsmen()
+	root.update_collision_between_swords_and_swordsmen()
 
 func action(_direction: ENUMS.DIRECTION, rot_deg: int):
 	direction = _direction

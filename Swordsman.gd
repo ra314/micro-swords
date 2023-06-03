@@ -91,6 +91,7 @@ func _physics_process(delta):
 		position = prev_position
 		velocity = prev_velocity
 		move_and_slide()
+	print(name, velocity)
 
 func detect_sword_collision() -> bool:
 	var retval = false
@@ -117,17 +118,21 @@ func respond_to_collision(sword: Sword):
 		_:
 			assert(false)
 
+var dead := false
 func die():
+	# Used to prevent multiple calls to the die function
+	if dead: return
 	queue_free()
 	if held_item != ENUMS.HELD_ITEM.NONE:
 		root.get_sword(held_item).die()
 	root.died(swordsman_name)
+	dead = true
 
 func pickup_sword(sword: Sword):
 	held_item = sword.sword_name
 	update_held_sword_location(sword)
-	root.update_collision_between_grounded_swords_and_empty_swordsmen()
 	sword.state = ENUMS.SWORD_STATE.HELD
+	root.update_collision_between_swords_and_swordsmen()
 	sword.direction = direction
 	$Arrow.visible = true
 	match direction:
@@ -151,7 +156,7 @@ func action():
 		# Enable collision with other swordsman
 		sword.set_collision_mask_value(other_swordsman.collision_layer(), true)
 		# Enable pickup of grounded swords
-		root.update_collision_between_grounded_swords_and_empty_swordsmen()
+		root.update_collision_between_swords_and_swordsmen()
 		# Update held item
 		last_held_item = held_item
 		held_item = ENUMS.HELD_ITEM.NONE
