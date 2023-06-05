@@ -183,7 +183,8 @@ func action():
 		var sword: Sword = root.get_sword(held_item)
 		
 		# Enable collision with other swordsman
-		sword.set_collision_mask_value(other_swordsman.collision_layer(), true)
+		if other_swordsman != null:
+			sword.set_collision_mask_value(other_swordsman.collision_layer(), true)
 		# Enable pickup of grounded swords
 		root.update_collision_between_swords_and_swordsmen()
 		# Update held item

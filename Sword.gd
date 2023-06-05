@@ -39,7 +39,7 @@ func _physics_process(delta):
 		move_and_slide()
 		detect_swordsman_collision()
 		
-		if is_on_floor():
+		if detect_platform_collision():
 			become_grounded()
 		else:
 			# Handle switching directions
@@ -65,6 +65,14 @@ func detect_swordsman_collision():
 		var collider = get_slide_collision(i).get_collider()
 		if collider.name == "Black" or collider.name == "Blue":
 			collider.respond_to_collision(self)
+
+func detect_platform_collision() -> bool:
+	for i in get_slide_collision_count():
+		var collider = get_slide_collision(i).get_collider()
+		if collider.name.contains("Platform"):
+			print(collider.name)
+			return true
+	return false
 
 func become_grounded():
 	state = ENUMS.SWORD_STATE.GROUNDED
