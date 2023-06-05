@@ -5,6 +5,11 @@ const RESET_PAUSE_TIME = 3.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	connect_buttons_to_actions()
+
+func connect_buttons_to_actions():
+	Utils.disconnect_all($Button1.button_up)
+	Utils.disconnect_all($Button2.button_up)
 	$Button1.button_up.connect($Black.action)
 	$Button2.button_up.connect($Blue.action)
 
@@ -102,13 +107,13 @@ func update_ui():
 var resetting := false
 func reset():
 	if has_node("Black"):
-		$Black.queue_free()
+		$Black.free()
 	if has_node("Blue"):
-		$Blue.queue_free()
+		$Blue.free()
 	if has_node("Sword1"):
-		$Sword1.queue_free()
+		$Sword1.free()
 	if has_node("Sword2"):
-		$Sword2.queue_free()
+		$Sword2.free()
 	var black = load("res://Swordsman.tscn").instantiate().init(ENUMS.DIRECTION.RIGHT, ENUMS.SWORDSMAN.BLACK, ENUMS.HELD_ITEM.SWORD_1)
 	var blue = load("res://Swordsman.tscn").instantiate().init(ENUMS.DIRECTION.LEFT, ENUMS.SWORDSMAN.BLUE, ENUMS.HELD_ITEM.SWORD_2)
 	var sword1 = load("res://Sword.tscn").instantiate().init(ENUMS.DIRECTION.RIGHT, ENUMS.HELD_ITEM.SWORD_1, ENUMS.SWORD_STATE.HELD)
@@ -117,4 +122,5 @@ func reset():
 	add_child(sword2)
 	add_child(black)
 	add_child(blue)
+	connect_buttons_to_actions()
 	resetting = false

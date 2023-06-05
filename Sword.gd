@@ -17,8 +17,12 @@ func init(_direction: ENUMS.DIRECTION, _sword_name: ENUMS.HELD_ITEM, _state: ENU
 	match sword_name:
 		ENUMS.HELD_ITEM.SWORD_1:
 			name = "Sword1"
+			set_collision_layer_value(4, true)
+			set_collision_mask_value(1, true)
 		ENUMS.HELD_ITEM.SWORD_2:
 			name = "Sword2"
+			set_collision_layer_value(5, true)
+			set_collision_mask_value(1, true)
 		_:
 			assert(false)
 	return self

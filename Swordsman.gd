@@ -27,9 +27,13 @@ func init(_direction: ENUMS.DIRECTION, _swordsman_name: ENUMS.SWORDSMAN, _held_i
 			name = "Black"
 			position = Vector2(488, 864)
 			modulate = Color(0, 0, 0, 1)
+			set_collision_layer_value(2, true)
+			set_collision_mask_value(1, true)
 		ENUMS.SWORDSMAN.BLUE:
 			name = "Blue"
 			position = Vector2(1824, 864)
+			set_collision_layer_value(3, true)
+			set_collision_mask_value(1, true)
 		_:
 			assert(false)
 	return self
