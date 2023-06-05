@@ -8,10 +8,10 @@ func _ready():
 	connect_buttons_to_actions()
 
 func connect_buttons_to_actions():
-	Utils.disconnect_all($Button1.button_up)
-	Utils.disconnect_all($Button2.button_up)
-	$Button1.button_up.connect($Black.action)
-	$Button2.button_up.connect($Blue.action)
+	Utils.disconnect_all($Button1.button_down)
+	Utils.disconnect_all($Button2.button_down)
+	$Button1.button_down.connect($Black.action)
+	$Button2.button_down.connect($Blue.action)
 
 func get_sword(item: ENUMS.HELD_ITEM) -> Sword: 
 	if item == ENUMS.HELD_ITEM.SWORD_1:
@@ -59,7 +59,9 @@ func collide(swordsman: Swordsman, sword: Sword, enable: bool):
 
 func update_collision_between_swords_and_swordsmen():
 	for swordsman in get_swordsmen():
+		if swordsman == null: continue
 		for sword in get_swords():
+			if sword == null: continue
 			match sword.state:
 				# If a sword is being held, you should never be able to 
 				# collide with it.

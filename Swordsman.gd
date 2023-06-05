@@ -115,8 +115,11 @@ func _physics_process(delta):
 		velocity = prev_velocity
 		move_and_slide()
 	
-	if Input.is_action_just_released("ui_accept"):
-		if name == "Black":
+	if Input.is_action_just_pressed("BLACK"):
+		if swordsman_name == ENUMS.SWORDSMAN.BLACK:
+			action()
+	if Input.is_action_just_pressed("BLUE"):
+		if swordsman_name == ENUMS.SWORDSMAN.BLUE:
 			action()
 
 func detect_sword_collision() -> bool:
