@@ -9,7 +9,7 @@ const JUMP_VELOCITY := -1540
 const MAX_ROT_RANGE_DEG := 120
 const ROT_SPEED := 4
 var rot_deg := 0
-var rotating_upwards := true
+var rotating_clockwise := true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 @export var direction: ENUMS.DIRECTION
@@ -29,11 +29,13 @@ func init(_direction: ENUMS.DIRECTION, _swordsman_name: ENUMS.SWORDSMAN, _held_i
 			modulate = Color(0, 0, 0, 1)
 			set_collision_layer_value(2, true)
 			set_collision_mask_value(1, true)
+			rotating_clockwise = false
 		ENUMS.SWORDSMAN.BLUE:
 			name = "Blue"
 			position = Vector2(1824, 864)
 			set_collision_layer_value(3, true)
 			set_collision_mask_value(1, true)
+			rot_deg = -180
 		_:
 			assert(false)
 	return self
@@ -42,26 +44,37 @@ func init(_direction: ENUMS.DIRECTION, _swordsman_name: ENUMS.SWORDSMAN, _held_i
 func _ready():
 	root = get_parent()
 	scale = Vector2(1.5, 1.5)
-	update_arrow_rotation()
 	update_held_sword_location(root.get_sword(held_item))
 #	debug_orig_y = position.y
 
-func update_arrow_rotation():
-	match direction:
-		ENUMS.DIRECTION.RIGHT:
-			$Arrow.rotation_degrees = -rot_deg
-		ENUMS.DIRECTION.LEFT:
-			$Arrow.rotation_degrees = -180+rot_deg
-		_:
-			assert(false)
+func flip_rotation():
+	rotating_clockwise = not rotating_clockwise
 
 func rotate_arrow():
-	if rotating_upwards:
+	if rotating_clockwise:
 		rot_deg += ROT_SPEED
 	else:
 		rot_deg -= ROT_SPEED
-	if rot_deg >= 120 or rot_deg <= 0:
-		rotating_upwards = not rotating_upwards
+	match rotating_clockwise:
+		true:
+			match direction:
+				ENUMS.DIRECTION.RIGHT:
+					if rot_deg >= 0: flip_rotation()
+				ENUMS.DIRECTION.LEFT:
+					if rot_deg >= -60: flip_rotation()
+				_:
+					assert(false)
+		false:
+			match direction:
+				ENUMS.DIRECTION.RIGHT:
+					if rot_deg <= -120: flip_rotation()
+				ENUMS.DIRECTION.LEFT:
+					if rot_deg <= -180: flip_rotation()
+				_:
+					assert(false)
+		_:
+			assert(false)
+	$Arrow.rotation_degrees = rot_deg
 
 func collision_layer():
 	return ConstData.SWORDSMAN_TO_COLLISION_LAYER[swordsman_name]
@@ -82,12 +95,10 @@ func _physics_process(delta):
 		direction = ENUMS.DIRECTION.RIGHT
 		if held_item != ENUMS.HELD_ITEM.NONE:
 			update_held_sword_location(root.get_sword(held_item))
-		update_arrow_rotation()
 	elif Utils.approx_equal(position.x, 1920-96):
 		direction = ENUMS.DIRECTION.LEFT
 		if held_item != ENUMS.HELD_ITEM.NONE:
 			update_held_sword_location(root.get_sword(held_item))
-		update_arrow_rotation()
 	
 	# Set velocity based on direction
 	if direction == ENUMS.DIRECTION.RIGHT:
@@ -100,7 +111,6 @@ func _physics_process(delta):
 		update_held_sword_location(root.get_sword(held_item))
 		# Rotate the arrow
 		rotate_arrow()
-		update_arrow_rotation()
 #		if rot_deg == 92:
 #			action()
 	
