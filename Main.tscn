@@ -18,7 +18,7 @@ position = Vector2(1208, 712)
 texture = ExtResource("2_nhpex")
 
 [node name="L-Side-Wall" parent="." instance=ExtResource("2_qj3co")]
-position = Vector2(424, 0)
+position = Vector2(-64, 0)
 scale = Vector2(8, 135)
 collision_mask = 0
 
@@ -33,7 +33,7 @@ collision_mask = 31
 
 [node name="Black" parent="." instance=ExtResource("3_dbffi")]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(488, 864)
+position = Vector2(0, 864)
 scale = Vector2(1.5, 1.5)
 direction = 1
 held_item = 1
@@ -46,7 +46,7 @@ held_item = 2
 swordsman_name = 1
 
 [node name="Sword1" parent="." instance=ExtResource("4_2fpqd")]
-position = Vector2(576, 808)
+position = Vector2(88, 808)
 collision_layer = 8
 collision_mask = 1
 state = 2
@@ -86,7 +86,7 @@ theme_override_font_sizes/font_size = 100
 text = "0"
 
 [node name="Platform1" parent="." instance=ExtResource("5_dy1bx")]
-position = Vector2(488, 544)
+position = Vector2(352, 448)
 scale = Vector2(31, 4)
 
 [node name="Platform2" parent="." instance=ExtResource("5_dy1bx")]
@@ -94,25 +94,25 @@ position = Vector2(1568, 784)
 scale = Vector2(44, 4.4)
 
 [node name="Platform3" parent="." instance=ExtResource("5_dy1bx")]
-position = Vector2(1432, 664)
+position = Vector2(1192, 608)
 scale = Vector2(45, 4)
 
 [node name="Platform4" parent="." instance=ExtResource("5_dy1bx")]
-position = Vector2(1488, 472)
+position = Vector2(1528, 336)
 scale = Vector2(46, 4)
 
 [node name="Platform5" parent="." instance=ExtResource("5_dy1bx")]
-position = Vector2(608, 656)
+position = Vector2(224, 608)
 scale = Vector2(48, 4)
 
 [node name="Platform6" parent="." instance=ExtResource("5_dy1bx")]
-position = Vector2(488, 784)
+position = Vector2(0, 784)
 scale = Vector2(39, 4)
 
 [node name="Platform7" parent="." instance=ExtResource("5_dy1bx")]
-position = Vector2(984, 520)
+position = Vector2(936, 480)
 scale = Vector2(40, 4)
 
 [node name="Platform8" parent="." instance=ExtResource("5_dy1bx")]
-position = Vector2(656, 392)
+position = Vector2(656, 696)
 scale = Vector2(46, 4)
