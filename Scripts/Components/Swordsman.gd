@@ -28,14 +28,10 @@ func init(_direction: ENUMS.DIRECTION, _swordsman_name: ENUMS.SWORDSMAN, _held_i
 			name = "Black"
 			position = Vector2(291, 864)
 			modulate = Color(0, 0, 0, 1)
-			set_collision_layer_value(2, true)
-			set_collision_mask_value(1, true)
 			rotating_clockwise = false
 		ENUMS.SWORDSMAN.BLUE:
 			name = "Blue"
 			position = Vector2(1629-96, 864)
-			set_collision_layer_value(3, true)
-			set_collision_mask_value(1, true)
 			rot_deg = -180
 		_:
 			assert(false)
@@ -77,9 +73,6 @@ func rotate_arrow():
 			assert(false)
 	$Arrow.rotation_degrees = rot_deg
 
-func collision_layer():
-	return ConstData.SWORDSMAN_TO_COLLISION_LAYER[swordsman_name]
-
 func update_held_sword_location(sword: Sword):
 	sword.position = position-ConstData.DIR_TO_RELATIVE_SWORD_POS[direction]
 
@@ -87,9 +80,6 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += ConstData.GRAVITY * delta
-#		if velocity.y > 0:
-#			print(debug_orig_y-position.y)
-#			print("hello")
 	
 	# Handle switching directions
 	if Utils.approx_equal(position.x, 291):
@@ -112,33 +102,25 @@ func _physics_process(delta):
 		update_held_sword_location(root.get_sword(held_item))
 		# Rotate the arrow
 		rotate_arrow()
-#		if rot_deg == 92:
-#			action()
 	
 	# MOVE
 	var prev_position = position
 	var prev_velocity = velocity
 	move_and_slide()
-	var collided_with_sword = detect_sword_collision()
-	# Kludge to prevent drop in velocity when jumping onto a grounded sword.
-	if collided_with_sword:
-		position = prev_position
-		velocity = prev_velocity
-		move_and_slide()
+	detect_and_respond_to_sword_collision()
 	
 	# Use is_action_pressed when no held item, to allow for bunny hopping
 	var action_name = ENUMS.SWORDSMAN.keys()[swordsman_name]
 	if Input.is_action_just_pressed(action_name):
 		action()
 
-func detect_sword_collision() -> bool:
-	var retval = false
-	for i in get_slide_collision_count():
-		var collider = get_slide_collision(i).get_collider()
-		if collider.name.contains("Sword"):
-			respond_to_collision(collider)
-			retval = true
-	return retval
+func detect_and_respond_to_sword_collision() -> bool:
+	var detected := false
+	for area in $Area2D.get_overlapping_areas():
+		if area.get_parent().name.contains("Sword"):
+			respond_to_collision(area.get_parent())
+			detected = true
+	return detected
 
 func respond_to_collision(sword: Sword):
 	match sword.state:
@@ -170,7 +152,8 @@ func pickup_sword(sword: Sword):
 	held_item = sword.sword_name
 	update_held_sword_location(sword)
 	sword.state = ENUMS.SWORD_STATE.HELD
-	root.update_collision_between_swords_and_swordsmen()
+	# Prevent any collisions
+	sword.set_collision_mask_value(1, false)
 	sword.direction = direction
 	$Arrow.visible = true
 	match direction:
@@ -191,11 +174,8 @@ func action():
 		var other_swordsman := root.get_other_swordsman(swordsman_name)
 		var sword: Sword = root.get_sword(held_item)
 		
-		# Enable collision with other swordsman
-		if other_swordsman != null:
-			sword.set_collision_mask_value(other_swordsman.collision_layer(), true)
-		# Enable pickup of grounded swords
-		root.update_collision_between_swords_and_swordsmen()
+		# Enable collision of sword with the ground
+		sword.set_collision_mask_value(1, true)
 		# Update held item
 		last_held_item = held_item
 		held_item = ENUMS.HELD_ITEM.NONE

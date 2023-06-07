@@ -56,47 +56,6 @@ func get_other_swordsman_name(man: ENUMS.SWORDSMAN) -> ENUMS.SWORDSMAN:
 	assert(false)
 	return ENUMS.SWORDSMAN.BLUE
 
-func collide(swordsman: Swordsman, sword: Sword, enable: bool):
-	swordsman.set_collision_mask_value(sword.collision_layer(), enable)
-
-func update_collision_between_swords_and_swordsmen():
-	for swordsman in get_swordsmen():
-		if swordsman == null: continue
-		for sword in get_swords():
-			if sword == null: continue
-			match sword.state:
-				# If a sword is being held, you should never be able to 
-				# collide with it.
-				ENUMS.SWORD_STATE.HELD:
-					collide(swordsman, sword, false)
-				ENUMS.SWORD_STATE.THROWN:
-					# Don't collide with a sword you've thrown if it's mid air
-					if swordsman.last_held_item == sword.sword_name:
-						collide(swordsman, sword, false)
-					# Only collide if you're not the one that threw the sword
-					else:
-						collide(swordsman, sword, true)
-				ENUMS.SWORD_STATE.GROUNDED:
-					if swordsman.held_item == ENUMS.HELD_ITEM.NONE:
-						# If you're not holding anything, you need to collide
-						# with grounded swords to be able to pick it up
-						collide(swordsman, sword, true)
-					elif swordsman.held_item in {ENUMS.HELD_ITEM.SWORD_1:1, ENUMS.HELD_ITEM.SWORD_2:1}:
-						# If you're already holding a sword, then you can't
-						# pick up a grounded sword
-						collide(swordsman, sword, false)
-					else:
-						assert(false)
-				_:
-					assert(false)
-
-func update_collision_between_grounded_swords_and_empty_swordsmen():
-	for swordsman in get_swordsmen():
-		for sword in get_swords():
-			if sword.state == ENUMS.SWORD_STATE.GROUNDED:
-				var enable_collision = swordsman.held_item == ENUMS.HELD_ITEM.NONE
-				swordsman.set_collision_mask_value(sword.collision_layer(), enable_collision)
-
 func died(man: ENUMS.SWORDSMAN):
 	score[get_other_swordsman_name(man)] += 1
 	update_ui()
@@ -113,8 +72,8 @@ func update_ui():
 	$BlueScore.text = str(score[ENUMS.SWORDSMAN.BLUE])
 func randomize_spawns():
 	var spawns = $Level/Spawns.get_children()
-	#var selected_spawn = Utils.select_random(spawns)
-	var selected_spawn = spawns[1]
+	var selected_spawn = Utils.select_random(spawns)
+	#var selected_spawn = spawns[1]
 	$Black.position = selected_spawn.get_node("Black").position
 	$Blue.position = selected_spawn.get_node("Blue").position
 var resetting := false
