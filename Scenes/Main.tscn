@@ -34,3 +34,12 @@ theme_override_font_sizes/font_size = 100
 text = "0"
 
 [node name="Level" parent="." instance=ExtResource("4_8737l")]
+
+[node name="WinText" type="Label" parent="."]
+visible = false
+offset_left = 384.0
+offset_right = 1536.0
+offset_bottom = 276.0
+theme_override_font_sizes/font_size = 200
+text = "It's A Draw"
+horizontal_alignment = 1

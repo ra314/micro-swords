@@ -102,7 +102,10 @@ func died(man: ENUMS.SWORDSMAN):
 	# If both players die within RESET_PAUSE_TIME,
 	# we don't want reset to be called twice.
 	if resetting: return
-	get_tree().create_timer(RESET_PAUSE_TIME).timeout.connect(reset)
+	if score[get_other_swordsman_name(man)] == ConstData.WIN_SCORE:
+		get_tree().create_timer(RESET_PAUSE_TIME).timeout.connect(end_game)
+	else:
+		get_tree().create_timer(RESET_PAUSE_TIME).timeout.connect(reset)
 	resetting = true
 func update_ui():
 	$BlackScore.text = str(score[ENUMS.SWORDSMAN.BLACK])
@@ -133,3 +136,17 @@ func reset():
 	connect_buttons_to_actions()
 	randomize_spawns()
 	resetting = false
+func end_game():
+	show_win_screen()
+func show_win_screen():
+	var black_wins = score[ENUMS.SWORDSMAN.BLACK] == ConstData.WIN_SCORE
+	var blue_wins = score[ENUMS.SWORDSMAN.BLUE] == ConstData.WIN_SCORE
+	if black_wins and blue_wins:
+		$WinText.text = "It's a Draw"
+	elif black_wins:
+		$WinText.text = "Black Wins"
+	elif blue_wins:
+		$WinText.text = "Blue Wins"
+	else:
+		assert(false)
+	$WinText.visible = true

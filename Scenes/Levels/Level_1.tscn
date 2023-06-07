@@ -58,49 +58,49 @@ scale = Vector2(56, 4)
 
 [node name="Spawns" type="Node" parent="."]
 
-[node name="Spawn_1" type="Node2D" parent="Spawns"]
+[node name="Spawn1" type="Node2D" parent="Spawns"]
 visible = false
 
-[node name="Black" type="Sprite2D" parent="Spawns/Spawn_1"]
+[node name="Black" type="Sprite2D" parent="Spawns/Spawn1"]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(0, 352)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_3l0om")
 centered = false
 
-[node name="Blue" type="Sprite2D" parent="Spawns/Spawn_1"]
+[node name="Blue" type="Sprite2D" parent="Spawns/Spawn1"]
 position = Vector2(1632, 672)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_3l0om")
 centered = false
 
-[node name="Spawn_2" type="Node2D" parent="Spawns"]
+[node name="Spawn2" type="Node2D" parent="Spawns"]
 visible = false
 
-[node name="Black" type="Sprite2D" parent="Spawns/Spawn_2"]
+[node name="Black" type="Sprite2D" parent="Spawns/Spawn2"]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(192, 672)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_3l0om")
 centered = false
 
-[node name="Blue" type="Sprite2D" parent="Spawns/Spawn_2"]
+[node name="Blue" type="Sprite2D" parent="Spawns/Spawn2"]
 position = Vector2(1824, 352)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_3l0om")
 centered = false
 
-[node name="Spawn_3" type="Node2D" parent="Spawns"]
+[node name="Spawn3" type="Node2D" parent="Spawns"]
 visible = false
 
-[node name="Black" type="Sprite2D" parent="Spawns/Spawn_3"]
+[node name="Black" type="Sprite2D" parent="Spawns/Spawn3"]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(64, 512)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_3l0om")
 centered = false
 
-[node name="Blue" type="Sprite2D" parent="Spawns/Spawn_3"]
+[node name="Blue" type="Sprite2D" parent="Spawns/Spawn3"]
 position = Vector2(1760, 512)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_3l0om")
