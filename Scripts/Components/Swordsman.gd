@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Swordsman
 
 # 4 bodylengths per second
-const SPEED := 64*4
+const SPEED := 64*6
 # Max jump height needs to be 3 times character height
 const JUMP_VELOCITY := -1540
 
@@ -125,12 +125,10 @@ func _physics_process(delta):
 		velocity = prev_velocity
 		move_and_slide()
 	
-	if Input.is_action_just_pressed("BLACK"):
-		if swordsman_name == ENUMS.SWORDSMAN.BLACK:
-			action()
-	if Input.is_action_just_pressed("BLUE"):
-		if swordsman_name == ENUMS.SWORDSMAN.BLUE:
-			action()
+	# Use is_action_pressed when no held item, to allow for bunny hopping
+	var action_name = ENUMS.SWORDSMAN.keys()[swordsman_name]
+	if Input.is_action_just_pressed(action_name):
+		action()
 
 func detect_sword_collision() -> bool:
 	var retval = false
