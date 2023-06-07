@@ -46,6 +46,7 @@ func _physics_process(delta):
 		detect_swordsman_collision()
 		
 		if detect_platform_collision():
+			print("becoming grounded")
 			become_grounded()
 		else:
 			# Handle switching directions
@@ -71,7 +72,6 @@ func detect_platform_collision() -> bool:
 	for i in get_slide_collision_count():
 		var collider = get_slide_collision(i).get_collider()
 		if collider.name.contains("Platform"):
-			print(collider.name)
 			return true
 	return false
 

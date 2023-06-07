@@ -32,6 +32,7 @@ scale = Vector2(0.614475, 0.583315)
 stream = ExtResource("3_osdtc")
 
 [node name="Restart" type="Button" parent="."]
+visible = false
 offset_left = 787.0
 offset_top = 821.0
 offset_right = 1105.0
