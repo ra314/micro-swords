@@ -51,6 +51,7 @@ collision_layer = 8
 collision_mask = 1
 state = 2
 sword_name = 1
+direction = 1
 
 [node name="Sword2" parent="." instance=ExtResource("4_2fpqd")]
 position = Vector2(1816, 808)
@@ -60,27 +61,27 @@ state = 2
 sword_name = 2
 
 [node name="Button1" type="Button" parent="."]
-offset_left = 512.0
-offset_right = 576.0
+offset_left = 64.0
+offset_right = 128.0
 offset_bottom = 64.0
 
 [node name="Button2" type="Button" parent="."]
-offset_left = 1832.0
-offset_right = 1896.0
+offset_left = 1792.0
+offset_right = 1856.0
 offset_bottom = 64.0
 
 [node name="BlackScore" type="Label" parent="."]
-offset_left = 512.0
+offset_left = 64.0
 offset_top = 64.0
-offset_right = 569.0
+offset_right = 121.0
 offset_bottom = 204.0
 theme_override_font_sizes/font_size = 100
 text = "0"
 
 [node name="BlueScore" type="Label" parent="."]
-offset_left = 1840.0
+offset_left = 1800.0
 offset_top = 64.0
-offset_right = 1897.0
+offset_right = 1857.0
 offset_bottom = 204.0
 theme_override_font_sizes/font_size = 100
 text = "0"

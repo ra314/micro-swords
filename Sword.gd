@@ -6,7 +6,7 @@ const THROW_SPEED = 1700
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 @export var state: ENUMS.SWORD_STATE
 @export var sword_name: ENUMS.HELD_ITEM
-var direction: ENUMS.DIRECTION
+@export var direction: ENUMS.DIRECTION
 var hor_speed: float
 var root: Root
 
@@ -33,6 +33,12 @@ func _ready():
 func collision_layer():
 	return ConstData.HELD_ITEM_TO_COLLISION_LAYER[sword_name]
 
+func set_velocity_based_on_direction():
+	if direction == ENUMS.DIRECTION.RIGHT:
+		velocity.x = hor_speed
+	else:
+		velocity.x = -hor_speed
+
 func _physics_process(delta):
 	if state == ENUMS.SWORD_STATE.THROWN:
 		# MOVE
@@ -43,19 +49,14 @@ func _physics_process(delta):
 			become_grounded()
 		else:
 			# Handle switching directions
-			if Utils.approx_equal(position.x, 488):
+			if Utils.approx_equal(position.x, 0):
 				direction = ENUMS.DIRECTION.RIGHT
 			elif Utils.approx_equal(position.x, 1920-16):
 				direction = ENUMS.DIRECTION.LEFT
 			
 			# Set velocity based on direction
-			if direction == ENUMS.DIRECTION.RIGHT:
-				velocity.x = hor_speed
-			else:
-				velocity.x = -hor_speed
+			set_velocity_based_on_direction()
 			velocity.y += ConstData.GRAVITY * delta
-#			if velocity.y > 0:
-#				print("hello")
 	
 	elif state == ENUMS.SWORD_STATE.HELD:
 		pass
@@ -88,12 +89,10 @@ func become_grounded():
 func action(_direction: ENUMS.DIRECTION, rot_deg: int):
 	direction = _direction
 	assert(state == ENUMS.SWORD_STATE.HELD)
-	var new_y = sin(deg_to_rad(rot_deg))*THROW_SPEED
-	var new_x = cos(deg_to_rad(rot_deg))*THROW_SPEED
-	hor_speed = new_x
-	velocity = Vector2(new_x, -new_y)
-	if direction == ENUMS.DIRECTION.LEFT:
-		velocity.x *= -1
+	var new_y = sin(deg_to_rad(abs(rot_deg)))*THROW_SPEED
+	hor_speed = abs(cos(deg_to_rad(abs(rot_deg)))*THROW_SPEED)
+	velocity.y = -new_y
+	set_velocity_based_on_direction()
 	state = ENUMS.SWORD_STATE.THROWN
 
 func die():

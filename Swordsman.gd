@@ -25,7 +25,7 @@ func init(_direction: ENUMS.DIRECTION, _swordsman_name: ENUMS.SWORDSMAN, _held_i
 	match swordsman_name:
 		ENUMS.SWORDSMAN.BLACK:
 			name = "Black"
-			position = Vector2(488, 864)
+			position = Vector2(0, 864)
 			modulate = Color(0, 0, 0, 1)
 			set_collision_layer_value(2, true)
 			set_collision_mask_value(1, true)
@@ -91,7 +91,7 @@ func _physics_process(delta):
 #			print("hello")
 	
 	# Handle switching directions
-	if Utils.approx_equal(position.x, 488):
+	if Utils.approx_equal(position.x, 0):
 		direction = ENUMS.DIRECTION.RIGHT
 		if held_item != ENUMS.HELD_ITEM.NONE:
 			update_held_sword_location(root.get_sword(held_item))
