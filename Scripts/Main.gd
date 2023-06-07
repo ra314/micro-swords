@@ -6,9 +6,10 @@ const RESET_PAUSE_TIME = 3.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	reset()
-	connect_buttons_to_actions()
+	connect_buttons_to_player_actions()
+	$Restart.button_down.connect(restart_level)
 
-func connect_buttons_to_actions():
+func connect_buttons_to_player_actions():
 	Utils.disconnect_all($Button1.button_down)
 	Utils.disconnect_all($Button2.button_down)
 	$Button1.button_down.connect($Black.action)
@@ -103,7 +104,7 @@ func died(man: ENUMS.SWORDSMAN):
 	# we don't want reset to be called twice.
 	if resetting: return
 	if score[get_other_swordsman_name(man)] == ConstData.WIN_SCORE:
-		get_tree().create_timer(RESET_PAUSE_TIME).timeout.connect(end_game)
+		get_tree().create_timer(RESET_PAUSE_TIME).timeout.connect(show_win_screen)
 	else:
 		get_tree().create_timer(RESET_PAUSE_TIME).timeout.connect(reset)
 	resetting = true
@@ -133,11 +134,9 @@ func reset():
 	add_child(sword2)
 	add_child(black)
 	add_child(blue)
-	connect_buttons_to_actions()
+	connect_buttons_to_player_actions()
 	randomize_spawns()
 	resetting = false
-func end_game():
-	show_win_screen()
 func show_win_screen():
 	var black_wins = score[ENUMS.SWORDSMAN.BLACK] == ConstData.WIN_SCORE
 	var blue_wins = score[ENUMS.SWORDSMAN.BLUE] == ConstData.WIN_SCORE
@@ -150,3 +149,11 @@ func show_win_screen():
 	else:
 		assert(false)
 	$WinText.visible = true
+	$Restart.visible = true
+func restart_level():
+	$WinText.visible = false
+	$Restart.visible = false
+	score[ENUMS.SWORDSMAN.BLACK] = 0
+	score[ENUMS.SWORDSMAN.BLUE] = 0
+	update_ui()
+	reset()

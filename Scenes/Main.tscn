@@ -7,6 +7,14 @@
 script = ExtResource("1_2xt38")
 metadata/_edit_horizontal_guides_ = [0.0]
 
+[node name="Restart" type="Button" parent="."]
+offset_left = 832.0
+offset_top = 496.0
+offset_right = 1088.0
+offset_bottom = 573.0
+theme_override_font_sizes/font_size = 50
+text = "Restart?"
+
 [node name="Button1" type="Button" parent="."]
 offset_left = 64.0
 offset_right = 128.0
