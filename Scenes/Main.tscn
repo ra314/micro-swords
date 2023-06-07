@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://cr3w4ih3a3mf7"]
+
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_2xt38"]
+[ext_resource type="PackedScene" uid="uid://lqur1np5u88c" path="res://Scenes/Levels/Level_1.tscn" id="4_8737l"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_2xt38")
+metadata/_edit_horizontal_guides_ = [0.0]
+
+[node name="Button1" type="Button" parent="."]
+offset_left = 64.0
+offset_right = 128.0
+offset_bottom = 64.0
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 1792.0
+offset_right = 1856.0
+offset_bottom = 64.0
+
+[node name="BlackScore" type="Label" parent="."]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 121.0
+offset_bottom = 204.0
+theme_override_font_sizes/font_size = 100
+text = "0"
+
+[node name="BlueScore" type="Label" parent="."]
+offset_left = 1800.0
+offset_top = 64.0
+offset_right = 1857.0
+offset_bottom = 204.0
+theme_override_font_sizes/font_size = 100
+text = "0"
+
+[node name="Level" parent="." instance=ExtResource("4_8737l")]

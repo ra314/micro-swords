@@ -7,3 +7,6 @@ static func disconnect_all(_signal: Signal) -> void:
 		var callable = connection["callable"]
 		_signal.disconnect(callable)
 
+static func select_random(array: Array):
+	randomize()
+	return array[randi_range(0, array.size()-1)]

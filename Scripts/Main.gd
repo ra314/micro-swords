@@ -5,6 +5,7 @@ const RESET_PAUSE_TIME = 3.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	reset()
 	connect_buttons_to_actions()
 
 func connect_buttons_to_actions():
@@ -106,6 +107,11 @@ func died(man: ENUMS.SWORDSMAN):
 func update_ui():
 	$BlackScore.text = str(score[ENUMS.SWORDSMAN.BLACK])
 	$BlueScore.text = str(score[ENUMS.SWORDSMAN.BLUE])
+func randomize_spawns():
+	var spawns = $Level/Spawns.get_children()
+	var selected_spawn = Utils.select_random(spawns)
+	$Black.position = selected_spawn.get_node("Black").position
+	$Blue.position = selected_spawn.get_node("Blue").position
 var resetting := false
 func reset():
 	if has_node("Black"):
@@ -116,13 +122,14 @@ func reset():
 		$Sword1.free()
 	if has_node("Sword2"):
 		$Sword2.free()
-	var black = load("res://Swordsman.tscn").instantiate().init(ENUMS.DIRECTION.RIGHT, ENUMS.SWORDSMAN.BLACK, ENUMS.HELD_ITEM.SWORD_1)
-	var blue = load("res://Swordsman.tscn").instantiate().init(ENUMS.DIRECTION.LEFT, ENUMS.SWORDSMAN.BLUE, ENUMS.HELD_ITEM.SWORD_2)
-	var sword1 = load("res://Sword.tscn").instantiate().init(ENUMS.DIRECTION.RIGHT, ENUMS.HELD_ITEM.SWORD_1, ENUMS.SWORD_STATE.HELD)
-	var sword2 = load("res://Sword.tscn").instantiate().init(ENUMS.DIRECTION.LEFT, ENUMS.HELD_ITEM.SWORD_2, ENUMS.SWORD_STATE.HELD)
+	var black = load("res://Scenes/Components/Swordsman.tscn").instantiate().init(ENUMS.DIRECTION.RIGHT, ENUMS.SWORDSMAN.BLACK, ENUMS.HELD_ITEM.SWORD_1)
+	var blue = load("res://Scenes/Components/Swordsman.tscn").instantiate().init(ENUMS.DIRECTION.LEFT, ENUMS.SWORDSMAN.BLUE, ENUMS.HELD_ITEM.SWORD_2)
+	var sword1 = load("res://Scenes/Components/Sword.tscn").instantiate().init(ENUMS.DIRECTION.RIGHT, ENUMS.HELD_ITEM.SWORD_1, ENUMS.SWORD_STATE.HELD)
+	var sword2 = load("res://Scenes/Components/Sword.tscn").instantiate().init(ENUMS.DIRECTION.LEFT, ENUMS.HELD_ITEM.SWORD_2, ENUMS.SWORD_STATE.HELD)
 	add_child(sword1)
 	add_child(sword2)
 	add_child(black)
 	add_child(blue)
 	connect_buttons_to_actions()
+	randomize_spawns()
 	resetting = false

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://vr4m8fm5lv47"]
 
-[ext_resource type="Script" path="res://Sword.gd" id="1_46w4d"]
-[ext_resource type="Texture2D" uid="uid://di23j62yi08gc" path="res://blue-square.svg" id="2_xo8fv"]
+[ext_resource type="Script" path="res://Scripts/Components/Sword.gd" id="1_bf0h4"]
+[ext_resource type="Texture2D" uid="uid://di23j62yi08gc" path="res://Assets/blue-square.svg" id="2_oku4i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mclpc"]
 size = Vector2(64, 64)
@@ -10,11 +10,11 @@ size = Vector2(64, 64)
 scale = Vector2(0.25, 1)
 collision_layer = 0
 collision_mask = 0
-script = ExtResource("1_46w4d")
+script = ExtResource("1_bf0h4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(32, 32)
-texture = ExtResource("2_xo8fv")
+texture = ExtResource("2_oku4i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(32, 32)

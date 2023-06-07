@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccbd5rrosfsx8"]
+[gd_scene load_steps=5 format=3 uid="uid://bujyrhr3yo7sf"]
 
-[ext_resource type="Texture2D" uid="uid://di23j62yi08gc" path="res://blue-square.svg" id="1_wpvrv"]
-[ext_resource type="Script" path="res://Swordsman.gd" id="1_y0qsv"]
-[ext_resource type="Texture2D" uid="uid://do2dt6u6j3ld0" path="res://arrow-next-right2.png" id="3_4kvfh"]
+[ext_resource type="Script" path="res://Scripts/Components/Swordsman.gd" id="1_ei4c6"]
+[ext_resource type="Texture2D" uid="uid://di23j62yi08gc" path="res://Assets/blue-square.svg" id="2_7qvld"]
+[ext_resource type="Texture2D" uid="uid://do2dt6u6j3ld0" path="res://Assets/arrow-next-right2.png" id="3_mq4i6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mclpc"]
 size = Vector2(64, 64)
@@ -10,11 +10,11 @@ size = Vector2(64, 64)
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 2
 platform_on_leave = 2
-script = ExtResource("1_y0qsv")
+script = ExtResource("1_ei4c6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(32, 32)
-texture = ExtResource("1_wpvrv")
+texture = ExtResource("2_7qvld")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(32, 32)
@@ -23,4 +23,4 @@ shape = SubResource("RectangleShape2D_mclpc")
 [node name="Arrow" type="Sprite2D" parent="."]
 position = Vector2(32, 32)
 scale = Vector2(0.125, 0.125)
-texture = ExtResource("3_4kvfh")
+texture = ExtResource("3_mq4i6")
