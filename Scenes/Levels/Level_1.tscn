@@ -1,60 +1,64 @@
-[gd_scene load_steps=4 format=3 uid="uid://lqur1np5u88c"]
+[gd_scene load_steps=5 format=3 uid="uid://lqur1np5u88c"]
 
 [ext_resource type="PackedScene" uid="uid://c6sajd1aute1i" path="res://Scenes/Components/Barrier.tscn" id="1_hpfm2"]
 [ext_resource type="PackedScene" uid="uid://bu72xm0yaxxps" path="res://Scenes/Components/Platform.tscn" id="2_awcaw"]
 [ext_resource type="Texture2D" uid="uid://di23j62yi08gc" path="res://Assets/blue-square.svg" id="4_3l0om"]
+[ext_resource type="Texture2D" uid="uid://bmdcjx1d7dwqx" path="res://Assets/Screenshot from 2023-06-03 00-34-29.png" id="4_u88iu"]
 
 [node name="Level_1" type="Node2D"]
+metadata/_edit_vertical_guides_ = []
+
+[node name="Reference" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.596078)
+texture = ExtResource("4_u88iu")
+centered = false
 
 [node name="L-Side-Wall" parent="." instance=ExtResource("1_hpfm2")]
-position = Vector2(-64, 0)
-scale = Vector2(8, 135)
+position = Vector2(227, 0)
+scale = Vector2(8, 101.981)
 collision_mask = 0
 
 [node name="R-Side-Wall" parent="." instance=ExtResource("1_hpfm2")]
-position = Vector2(1920, 0)
-scale = Vector2(8, 135)
+position = Vector2(1629, 0)
+scale = Vector2(8, 102)
 
 [node name="Platform0" parent="." instance=ExtResource("1_hpfm2")]
-position = Vector2(0, 960)
-scale = Vector2(240, 7)
+position = Vector2(227, 784)
+scale = Vector2(183.252, 4)
 collision_mask = 31
 
 [node name="Platform5" parent="." instance=ExtResource("2_awcaw")]
-position = Vector2(64, 608)
-scale = Vector2(48, 4)
+position = Vector2(372, 483)
+scale = Vector2(47.2398, 4)
 
 [node name="Platform6" parent="." instance=ExtResource("2_awcaw")]
-position = Vector2(0, 448)
-scale = Vector2(40, 4.103)
+position = Vector2(291, 371)
+scale = Vector2(24.7243, 4)
 
 [node name="Platform7" parent="." instance=ExtResource("2_awcaw")]
-position = Vector2(640, 576)
-scale = Vector2(80, 4)
+position = Vector2(750, 352)
+scale = Vector2(43, 4)
 
 [node name="Platform8" parent="." instance=ExtResource("2_awcaw")]
-position = Vector2(192, 768)
-scale = Vector2(48, 4)
+position = Vector2(291, 609)
+scale = Vector2(32.1724, 4)
 
 [node name="Platform9" parent="." instance=ExtResource("2_awcaw")]
-position = Vector2(1472, 608)
-scale = Vector2(48, 4)
-
-[node name="Platform10" parent="." instance=ExtResource("2_awcaw")]
-position = Vector2(1600, 448)
-scale = Vector2(40, 4.103)
+position = Vector2(1155, 492)
+scale = Vector2(47, 4)
 
 [node name="Platform11" parent="." instance=ExtResource("2_awcaw")]
-position = Vector2(1344, 768)
-scale = Vector2(48, 4)
+position = Vector2(1332, 614)
+scale = Vector2(37.1241, 4)
 
 [node name="Platform12" parent="." instance=ExtResource("2_awcaw")]
-position = Vector2(320, 320)
-scale = Vector2(56, 4)
+position = Vector2(411, 219)
+scale = Vector2(45.7187, 4)
 
 [node name="Platform13" parent="." instance=ExtResource("2_awcaw")]
-position = Vector2(1152, 320)
-scale = Vector2(56, 4)
+position = Vector2(1242, 304)
+scale = Vector2(45.7148, 4)
 
 [node name="Spawns" type="Node" parent="."]
 
@@ -63,13 +67,13 @@ visible = false
 
 [node name="Black" type="Sprite2D" parent="Spawns/Spawn1"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(0, 352)
+position = Vector2(291, 274)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_3l0om")
 centered = false
 
 [node name="Blue" type="Sprite2D" parent="Spawns/Spawn1"]
-position = Vector2(1632, 672)
+position = Vector2(1533, 518)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_3l0om")
 centered = false
@@ -79,13 +83,13 @@ visible = false
 
 [node name="Black" type="Sprite2D" parent="Spawns/Spawn2"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(192, 672)
+position = Vector2(291, 512)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_3l0om")
 centered = false
 
 [node name="Blue" type="Sprite2D" parent="Spawns/Spawn2"]
-position = Vector2(1824, 352)
+position = Vector2(1512, 208)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_3l0om")
 centered = false
@@ -95,13 +99,13 @@ visible = false
 
 [node name="Black" type="Sprite2D" parent="Spawns/Spawn3"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(64, 512)
+position = Vector2(372, 387)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_3l0om")
 centered = false
 
 [node name="Blue" type="Sprite2D" parent="Spawns/Spawn3"]
-position = Vector2(1760, 512)
+position = Vector2(1413, 396)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_3l0om")
 centered = false

@@ -1,29 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://cr3w4ih3a3mf7"]
+[gd_scene load_steps=4 format=3 uid="uid://cr3w4ih3a3mf7"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_2xt38"]
+[ext_resource type="VideoStream" path="res://Assets/output.ogv" id="3_osdtc"]
 [ext_resource type="PackedScene" uid="uid://lqur1np5u88c" path="res://Scenes/Levels/Level_1.tscn" id="4_8737l"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2xt38")
 metadata/_edit_horizontal_guides_ = [0.0]
-
-[node name="Restart" type="Button" parent="."]
-offset_left = 832.0
-offset_top = 496.0
-offset_right = 1088.0
-offset_bottom = 573.0
-theme_override_font_sizes/font_size = 50
-text = "Restart?"
-
-[node name="Button1" type="Button" parent="."]
-offset_left = 64.0
-offset_right = 128.0
-offset_bottom = 64.0
-
-[node name="Button2" type="Button" parent="."]
-offset_left = 1792.0
-offset_right = 1856.0
-offset_bottom = 64.0
 
 [node name="BlackScore" type="Label" parent="."]
 offset_left = 64.0
@@ -41,6 +24,21 @@ offset_bottom = 204.0
 theme_override_font_sizes/font_size = 100
 text = "0"
 
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_top = 120.0
+offset_right = 3120.0
+offset_bottom = 1560.0
+scale = Vector2(0.614475, 0.583315)
+stream = ExtResource("3_osdtc")
+
+[node name="Restart" type="Button" parent="."]
+offset_left = 787.0
+offset_top = 821.0
+offset_right = 1105.0
+offset_bottom = 955.0
+theme_override_font_sizes/font_size = 50
+text = "Restart?"
+
 [node name="Level" parent="." instance=ExtResource("4_8737l")]
 
 [node name="WinText" type="Label" parent="."]
@@ -51,3 +49,15 @@ offset_bottom = 276.0
 theme_override_font_sizes/font_size = 200
 text = "It's A Draw"
 horizontal_alignment = 1
+
+[node name="Button1" type="Button" parent="."]
+offset_left = 99.0
+offset_top = 822.0
+offset_right = 370.0
+offset_bottom = 956.0
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 1550.0
+offset_top = 822.0
+offset_right = 1821.0
+offset_bottom = 956.0

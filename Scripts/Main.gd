@@ -113,7 +113,8 @@ func update_ui():
 	$BlueScore.text = str(score[ENUMS.SWORDSMAN.BLUE])
 func randomize_spawns():
 	var spawns = $Level/Spawns.get_children()
-	var selected_spawn = Utils.select_random(spawns)
+	#var selected_spawn = Utils.select_random(spawns)
+	var selected_spawn = spawns[1]
 	$Black.position = selected_spawn.get_node("Black").position
 	$Blue.position = selected_spawn.get_node("Blue").position
 var resetting := false

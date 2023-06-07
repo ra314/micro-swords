@@ -49,9 +49,9 @@ func _physics_process(delta):
 			become_grounded()
 		else:
 			# Handle switching directions
-			if Utils.approx_equal(position.x, 0):
+			if Utils.approx_equal(position.x, 291):
 				direction = ENUMS.DIRECTION.RIGHT
-			elif Utils.approx_equal(position.x, 1920-16):
+			elif Utils.approx_equal(position.x, 1629-16):
 				direction = ENUMS.DIRECTION.LEFT
 			
 			# Set velocity based on direction

@@ -2,9 +2,10 @@ extends CharacterBody2D
 class_name Swordsman
 
 # 4 bodylengths per second
-const SPEED := 64*6
+# const SPEED := 64*4
+const SPEED := 350
 # Max jump height needs to be 3 times character height
-const JUMP_VELOCITY := -1540
+const JUMP_VELOCITY := -1250
 
 const MAX_ROT_RANGE_DEG := 120
 const ROT_SPEED := 4
@@ -25,14 +26,14 @@ func init(_direction: ENUMS.DIRECTION, _swordsman_name: ENUMS.SWORDSMAN, _held_i
 	match swordsman_name:
 		ENUMS.SWORDSMAN.BLACK:
 			name = "Black"
-			position = Vector2(0, 864)
+			position = Vector2(291, 864)
 			modulate = Color(0, 0, 0, 1)
 			set_collision_layer_value(2, true)
 			set_collision_mask_value(1, true)
 			rotating_clockwise = false
 		ENUMS.SWORDSMAN.BLUE:
 			name = "Blue"
-			position = Vector2(1824, 864)
+			position = Vector2(1629-96, 864)
 			set_collision_layer_value(3, true)
 			set_collision_mask_value(1, true)
 			rot_deg = -180
@@ -91,11 +92,11 @@ func _physics_process(delta):
 #			print("hello")
 	
 	# Handle switching directions
-	if Utils.approx_equal(position.x, 0):
+	if Utils.approx_equal(position.x, 291):
 		direction = ENUMS.DIRECTION.RIGHT
 		if held_item != ENUMS.HELD_ITEM.NONE:
 			update_held_sword_location(root.get_sword(held_item))
-	elif Utils.approx_equal(position.x, 1920-96):
+	elif Utils.approx_equal(position.x, 1629-96):
 		direction = ENUMS.DIRECTION.LEFT
 		if held_item != ENUMS.HELD_ITEM.NONE:
 			update_held_sword_location(root.get_sword(held_item))
