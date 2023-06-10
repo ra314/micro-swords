@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di23j62yi08gc"
-path="res://.godot/imported/blue-square.svg-b5f89414f3fa8dd49701b4e6f92d0a18.ctex"
+uid="uid://dkk1h0ta2djsf"
+path="res://.godot/imported/DinoSprites - mort.png-704bd5d9ce746bcf144563c15e307702.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/blue-square.svg"
-dest_files=["res://.godot/imported/blue-square.svg-b5f89414f3fa8dd49701b4e6f92d0a18.ctex"]
+source_file="res://Assets/dinoCharactersVersion1.1/sheets/DinoSprites - mort.png"
+dest_files=["res://.godot/imported/DinoSprites - mort.png-704bd5d9ce746bcf144563c15e307702.ctex"]
 
 [params]
 
@@ -25,13 +25,10 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
+detect_3d/compress_to=1

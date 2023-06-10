@@ -105,7 +105,7 @@ texture = ExtResource("4_3l0om")
 centered = false
 
 [node name="Blue" type="Sprite2D" parent="Spawns/Spawn3"]
-position = Vector2(1413, 396)
+position = Vector2(1435, 396)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_3l0om")
 centered = false

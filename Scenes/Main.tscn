@@ -9,22 +9,23 @@ script = ExtResource("1_2xt38")
 metadata/_edit_horizontal_guides_ = [0.0]
 
 [node name="BlackScore" type="Label" parent="."]
-offset_left = 64.0
-offset_top = 64.0
-offset_right = 121.0
-offset_bottom = 204.0
+offset_left = 538.0
+offset_top = 818.0
+offset_right = 595.0
+offset_bottom = 958.0
 theme_override_font_sizes/font_size = 100
 text = "0"
 
 [node name="BlueScore" type="Label" parent="."]
-offset_left = 1800.0
-offset_top = 64.0
-offset_right = 1857.0
-offset_bottom = 204.0
+offset_left = 1348.0
+offset_top = 814.0
+offset_right = 1405.0
+offset_bottom = 954.0
 theme_override_font_sizes/font_size = 100
 text = "0"
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+visible = false
 offset_top = 120.0
 offset_right = 3120.0
 offset_bottom = 1560.0
@@ -61,4 +62,10 @@ offset_bottom = 956.0
 offset_left = 1550.0
 offset_top = 822.0
 offset_right = 1821.0
+offset_bottom = 956.0
+
+[node name="Menu" type="Button" parent="."]
+offset_left = 99.0
+offset_top = 822.0
+offset_right = 370.0
 offset_bottom = 956.0

@@ -27,14 +27,21 @@ func init(_direction: ENUMS.DIRECTION, _swordsman_name: ENUMS.SWORDSMAN, _held_i
 		ENUMS.SWORDSMAN.BLACK:
 			name = "Black"
 			position = Vector2(291, 864)
-			modulate = Color(0, 0, 0, 1)
-			rotating_clockwise = false
+			$Sprite2D.texture = load("res://Assets/dinoCharactersVersion1.1/sheets/DinoSprites - mort.png")
 		ENUMS.SWORDSMAN.BLUE:
 			name = "Blue"
 			position = Vector2(1629-96, 864)
+			$Sprite2D.texture = load("res://Assets/dinoCharactersVersion1.1/sheets/DinoSprites - tard.png")
+		_:
+			assert(false)
+	match direction:
+		ENUMS.DIRECTION.RIGHT:
+			rotating_clockwise = false
+		ENUMS.DIRECTION.LEFT:
 			rot_deg = -180
 		_:
 			assert(false)
+	update_character_x_scale()
 	return self
 
 #var debug_orig_y
@@ -42,6 +49,7 @@ func _ready():
 	root = get_parent()
 	scale = Vector2(1.5, 1.5)
 	update_held_sword_location(root.get_sword(held_item))
+	$AnimationPlayer.play("Walk")
 #	debug_orig_y = position.y
 
 func flip_rotation():
@@ -76,18 +84,32 @@ func rotate_arrow():
 func update_held_sword_location(sword: Sword):
 	sword.position = position-ConstData.DIR_TO_RELATIVE_SWORD_POS[direction]
 
+func update_character_x_scale():
+	match direction:
+		ENUMS.DIRECTION.RIGHT:
+			$Sprite2D.scale.x = abs($Sprite2D.scale.x)
+		ENUMS.DIRECTION.LEFT:
+			$Sprite2D.scale.x = abs($Sprite2D.scale.x) * -1
+		_:
+			assert(false)
+
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += ConstData.GRAVITY * delta
 	
 	# Handle switching directions
+	# Updating sword location
+	# And flipping player sprite
+	var flipped_direction := false
 	if Utils.approx_equal(position.x, 291):
 		direction = ENUMS.DIRECTION.RIGHT
-		if held_item != ENUMS.HELD_ITEM.NONE:
-			update_held_sword_location(root.get_sword(held_item))
+		flipped_direction = true
 	elif Utils.approx_equal(position.x, 1629-96):
 		direction = ENUMS.DIRECTION.LEFT
+		flipped_direction = true
+	if flipped_direction:
+		update_character_x_scale()
 		if held_item != ENUMS.HELD_ITEM.NONE:
 			update_held_sword_location(root.get_sword(held_item))
 	
