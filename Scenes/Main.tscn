@@ -65,7 +65,7 @@ offset_right = 1821.0
 offset_bottom = 956.0
 
 [node name="Menu" type="Button" parent="."]
-offset_left = 99.0
-offset_top = 822.0
-offset_right = 370.0
-offset_bottom = 956.0
+offset_left = 2.0
+offset_top = 16.0
+offset_right = 226.0
+offset_bottom = 156.0

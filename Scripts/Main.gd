@@ -10,8 +10,8 @@ func _ready():
 	$Restart.button_down.connect(restart_level)
 
 func connect_buttons_to_player_actions():
-	Utils.disconnect_all($Button1.button_down)
-	Utils.disconnect_all($Button2.button_down)
+	#Utils.disconnect_all($Button1.button_down)
+	#Utils.disconnect_all($Button2.button_down)
 	$Button1.button_down.connect($Black.action)
 	$Button2.button_down.connect($Blue.action)
 
