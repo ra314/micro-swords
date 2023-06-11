@@ -1,12 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cr3w4ih3a3mf7"]
+[gd_scene load_steps=9 format=3 uid="uid://cr3w4ih3a3mf7"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_2xt38"]
 [ext_resource type="PackedScene" uid="uid://uqbxmyga708p" path="res://Scenes/Levels/Level_2.tscn" id="3_apw3u"]
 [ext_resource type="VideoStream" path="res://Assets/output.ogv" id="3_osdtc"]
 [ext_resource type="Texture2D" uid="uid://dj5cpt4ffqy3x" path="res://Assets/dinoCharactersVersion1.1/sheets/mort.png" id="4_3bfrh"]
 [ext_resource type="Texture2D" uid="uid://ty0irhjgngai" path="res://Assets/dinoCharactersVersion1.1/sheets/tard.png" id="5_oc522"]
+[ext_resource type="Texture2D" uid="uid://bn7p0pj5mveno" path="res://Assets/more-info-icon.svg" id="6_p46ue"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uxvmv"]
+bg_color = Color(0.227451, 0.227451, 0.227451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgc1i"]
 bg_color = Color(0.227451, 0.227451, 0.227451, 1)
 
 [node name="Main" type="Node2D"]
@@ -79,8 +83,24 @@ offset_bottom = 857.0
 scale = Vector2(200, 140)
 texture_normal = ExtResource("5_oc522")
 
-[node name="Menu" type="Button" parent="."]
-offset_left = 2.0
-offset_top = 16.0
-offset_right = 226.0
-offset_bottom = 156.0
+[node name="Info" type="TextureButton" parent="."]
+process_mode = 3
+offset_right = 512.0
+offset_bottom = 512.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("6_p46ue")
+
+[node name="Credits" type="Label" parent="."]
+visible = false
+z_index = 1
+offset_top = 160.0
+offset_right = 1920.0
+offset_bottom = 512.0
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_bgc1i")
+text = "Credits:
+ - Dino sprites were made by @ScissorMarks. (https://arks.itch.io/dino-characters)
+ - Spear sprite was made by turkish-coffee. (https://turkish-coffee.itch.io/pixel-swords-and-spears)
+ - Terrain was made by @PixelFrogStudio. (https://pixelfrog-assets.itch.io/pixel-adventure-1)
+ - Game was coded up by ra314. (https://github.com/ra314)
+ - Heavily inspired by the sword throwing game from MicroBattles2 by @DonutGames_. "

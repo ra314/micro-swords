@@ -8,6 +8,11 @@ func _ready():
 	reset()
 	connect_buttons_to_player_actions()
 	$Restart.button_down.connect(restart_level)
+	$Info.button_down.connect(show_info)
+
+func show_info():
+	get_tree().paused = not get_tree().paused
+	$Credits.visible = not $Credits.visible
 
 func connect_buttons_to_player_actions():
 	#Utils.disconnect_all($Button1.button_down)
