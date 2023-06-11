@@ -10,6 +10,10 @@ const THROW_SPEED = 1700
 var hor_speed: float
 var ROTATION_SPEED := 30.0
 var root: Root
+# This is set to true, when thrown
+# Set to false after the first bounce, or after becoming grounded
+# The intention is to prevent multiple bounces off the same wall
+var can_switch_directions := false
 
 func init(_direction: ENUMS.DIRECTION, _sword_name: ENUMS.HELD_ITEM, _state: ENUMS.SWORD_STATE):
 	direction = _direction
@@ -39,15 +43,20 @@ func _physics_process(delta):
 		# MOVE
 		move_and_slide()
 		
-		if detect_platform_collision():
-			print("becoming grounded")
+		if Utils.detect_collision("Platforms", self):
 			become_grounded()
 		else:
 			# Handle switching directions
-			if Utils.approx_equal(position.x, 291):
-				direction = ENUMS.DIRECTION.RIGHT
-			elif Utils.approx_equal(position.x, 1629-16):
-				direction = ENUMS.DIRECTION.LEFT
+			if Utils.detect_collision("Walls", self) and can_switch_directions:
+				if direction == ENUMS.DIRECTION.RIGHT:
+					direction = ENUMS.DIRECTION.LEFT
+				else:
+					direction = ENUMS.DIRECTION.RIGHT
+				can_switch_directions = false
+#			if Utils.approx_equal(position.x, 291):
+#				direction = ENUMS.DIRECTION.RIGHT
+#			elif Utils.approx_equal(position.x, 1629-16):
+#				direction = ENUMS.DIRECTION.LEFT
 			
 			# Set velocity based on direction
 			set_velocity_based_on_direction()
@@ -56,17 +65,10 @@ func _physics_process(delta):
 	elif state == ENUMS.SWORD_STATE.HELD:
 		pass
 
-func detect_platform_collision() -> bool:
-	for i in get_slide_collision_count():
-		var collider = get_slide_collision(i).get_collider()
-		print(collider.name)
-		if collider.name.contains("Platforms"):
-			return true
-	return false
-
 func become_grounded():
 	state = ENUMS.SWORD_STATE.GROUNDED
 	velocity = Vector2(0,0)
+	can_switch_directions = false
 
 func action(_direction: ENUMS.DIRECTION, rot_deg: int):
 	direction = _direction
@@ -76,6 +78,7 @@ func action(_direction: ENUMS.DIRECTION, rot_deg: int):
 	velocity.y = -new_y
 	set_velocity_based_on_direction()
 	state = ENUMS.SWORD_STATE.THROWN
+	can_switch_directions = true
 
 func die():
 	queue_free()
