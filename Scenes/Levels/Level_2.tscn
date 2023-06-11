@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://uqbxmyga708p"]
 
-[ext_resource type="Texture2D" path="res://Assets/Screenshot from 2023-06-03 00-34-29.png" id="1_48ufj"]
+[ext_resource type="Texture2D" uid="uid://bmdcjx1d7dwqx" path="res://Assets/Screenshot from 2023-06-03 00-34-29.png" id="1_48ufj"]
 [ext_resource type="Texture2D" uid="uid://di23j62yi08gc" path="res://Assets/blue-square.svg" id="4_f2lwm"]
-[ext_resource type="Texture2D" path="res://Assets/Pixel Adventure 1/Free/Terrain/Terrain (16x16).png" id="5_1jwtl"]
+[ext_resource type="Texture2D" uid="uid://om0tn0dv48at" path="res://Assets/Pixel Adventure 1/Free/Terrain/Terrain (16x16).png" id="5_1jwtl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_swi88"]
 texture = ExtResource("5_1jwtl")

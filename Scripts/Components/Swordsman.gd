@@ -28,6 +28,7 @@ func init(_direction: ENUMS.DIRECTION, _swordsman_name: ENUMS.SWORDSMAN, _held_i
 			name = "Black"
 			position = Vector2(291, 864)
 			$Sprite2D.texture = load("res://Assets/dinoCharactersVersion1.1/sheets/DinoSprites - mort.png")
+			$Sprite2D.offset.x = -2
 		ENUMS.SWORDSMAN.BLUE:
 			name = "Blue"
 			position = Vector2(1629-96, 864)
