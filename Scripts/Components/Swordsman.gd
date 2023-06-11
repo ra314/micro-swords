@@ -154,9 +154,10 @@ func respond_to_collision(sword: Sword):
 				pickup_sword(sword)
 		ENUMS.SWORD_STATE.THROWN:
 			if last_held_item != sword.sword_name:
-				print("die")
-				die()
-				sword.die()
+				if sword.time_in_air > ConstData.SWORD_THROWN_INVULNERABILITY_TIME:
+					print("die")
+					die()
+					sword.die()
 		_:
 			assert(false)
 

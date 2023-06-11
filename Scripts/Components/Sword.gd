@@ -13,6 +13,8 @@ var root: Root
 # Set to false after the first bounce, or after becoming grounded
 # The intention is to prevent multiple bounces off the same wall
 var can_switch_directions := false
+# Time spent after being thrown, before being grounded.
+var time_in_air := 0.0
 
 func init(_direction: ENUMS.DIRECTION, _sword_name: ENUMS.HELD_ITEM, _state: ENUMS.SWORD_STATE):
 	direction = _direction
@@ -52,6 +54,7 @@ static func get_angle_based_on_velocity(velocity: Vector2) -> float:
 
 func _physics_process(delta):
 	if state == ENUMS.SWORD_STATE.THROWN:
+		time_in_air += delta
 		rotation_degrees = get_angle_based_on_velocity(velocity)
 		# MOVE
 		move_and_slide()

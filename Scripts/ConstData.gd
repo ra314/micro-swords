@@ -14,6 +14,8 @@ const SWORDSMAN_TO_COLLISION_LAYER = {
 
 const GRAVITY = 4500
 const WIN_SCORE = 5
+# 2 frames at 60 fps
+const SWORD_THROWN_INVULNERABILITY_TIME = 2/60
 
 #Player: H17, W16
 #Platform Ground: W58
