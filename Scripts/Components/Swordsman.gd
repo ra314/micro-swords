@@ -5,7 +5,7 @@ class_name Swordsman
 # const SPEED := 64*4
 const SPEED := 350
 # Max jump height needs to be 3 times character height
-const JUMP_VELOCITY := -1250
+const JUMP_VELOCITY := -1500
 
 const MAX_ROT_RANGE_DEG := 120
 const ROT_SPEED := 4
@@ -102,10 +102,10 @@ func _physics_process(delta):
 	# Updating sword location
 	# And flipping player sprite
 	var flipped_direction := false
-	if Utils.approx_equal(position.x, 291):
+	if Utils.approx_equal(position.x, 256):
 		direction = ENUMS.DIRECTION.RIGHT
 		flipped_direction = true
-	elif Utils.approx_equal(position.x, 1629-96):
+	elif Utils.approx_equal(position.x, 1568):
 		direction = ENUMS.DIRECTION.LEFT
 		flipped_direction = true
 	if flipped_direction:

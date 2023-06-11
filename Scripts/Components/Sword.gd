@@ -8,7 +8,7 @@ const THROW_SPEED = 1700
 @export var sword_name: ENUMS.HELD_ITEM
 @export var direction: ENUMS.DIRECTION
 var hor_speed: float
-var ROTATION_SPEED := 15.0
+var ROTATION_SPEED := 30.0
 var root: Root
 
 func init(_direction: ENUMS.DIRECTION, _sword_name: ENUMS.HELD_ITEM, _state: ENUMS.SWORD_STATE):
@@ -59,7 +59,8 @@ func _physics_process(delta):
 func detect_platform_collision() -> bool:
 	for i in get_slide_collision_count():
 		var collider = get_slide_collision(i).get_collider()
-		if collider.name.contains("Platform"):
+		print(collider.name)
+		if collider.name.contains("Platforms"):
 			return true
 	return false
 
