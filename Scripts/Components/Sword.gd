@@ -8,7 +8,6 @@ const THROW_SPEED = 1700
 @export var sword_name: ENUMS.HELD_ITEM
 @export var direction: ENUMS.DIRECTION
 var hor_speed: float
-var ROTATION_SPEED := 30.0
 var root: Root
 # This is set to true, when thrown
 # Set to false after the first bounce, or after becoming grounded
@@ -37,9 +36,23 @@ func set_velocity_based_on_direction():
 	else:
 		velocity.x = -hor_speed
 
+static func get_angle_based_on_velocity(velocity: Vector2) -> float:
+	var angle = rad_to_deg(atan(abs(velocity.y)/abs(velocity.x)))
+	if velocity.x > 0:
+		if velocity.y > 0:
+			angle = 90+angle
+		else:
+			angle = 90-angle
+	else:
+		if velocity.y > 0:
+			angle = -90-angle
+		else:
+			angle = -90+angle
+	return angle
+
 func _physics_process(delta):
 	if state == ENUMS.SWORD_STATE.THROWN:
-		rotation_degrees += ROTATION_SPEED
+		rotation_degrees = get_angle_based_on_velocity(velocity)
 		# MOVE
 		move_and_slide()
 		
