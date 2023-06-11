@@ -8,6 +8,7 @@ const THROW_SPEED = 1700
 @export var sword_name: ENUMS.HELD_ITEM
 @export var direction: ENUMS.DIRECTION
 var hor_speed: float
+var ROTATION_SPEED := 15.0
 var root: Root
 
 func init(_direction: ENUMS.DIRECTION, _sword_name: ENUMS.HELD_ITEM, _state: ENUMS.SWORD_STATE):
@@ -34,6 +35,7 @@ func set_velocity_based_on_direction():
 
 func _physics_process(delta):
 	if state == ENUMS.SWORD_STATE.THROWN:
+		rotation_degrees += ROTATION_SPEED
 		# MOVE
 		move_and_slide()
 		

@@ -174,6 +174,7 @@ func pickup_sword(sword: Sword):
 	held_item = sword.sword_name
 	update_held_sword_location(sword)
 	sword.state = ENUMS.SWORD_STATE.HELD
+	sword.rotation_degrees = 0
 	# Prevent any collisions
 	sword.set_collision_mask_value(1, false)
 	sword.direction = direction
