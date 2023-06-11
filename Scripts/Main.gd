@@ -17,8 +17,8 @@ func show_info():
 func connect_buttons_to_player_actions():
 	#Utils.disconnect_all($Button1.button_down)
 	#Utils.disconnect_all($Button2.button_down)
-	$Button1.button_down.connect($Black.action)
-	$Button2.button_down.connect($Blue.action)
+	$Button1.pressed.connect($Black.action)
+	$Button2.pressed.connect($Blue.action)
 
 func get_sword(item: ENUMS.HELD_ITEM) -> Sword: 
 	if item == ENUMS.HELD_ITEM.SWORD_1:

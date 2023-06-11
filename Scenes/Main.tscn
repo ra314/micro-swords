@@ -65,21 +65,15 @@ theme_override_font_sizes/font_size = 200
 text = "It's A Draw"
 horizontal_alignment = 1
 
-[node name="Button1" type="TextureButton" parent="."]
+[node name="Button1" type="TouchScreenButton" parent="."]
 texture_filter = 1
-offset_left = 192.0
-offset_top = 856.0
-offset_right = 193.0
-offset_bottom = 857.0
+position = Vector2(192, 856)
 scale = Vector2(200, 140)
 texture_normal = ExtResource("4_3bfrh")
 
-[node name="Button2" type="TextureButton" parent="."]
+[node name="Button2" type="TouchScreenButton" parent="."]
 texture_filter = 1
-offset_left = 1528.0
-offset_top = 856.0
-offset_right = 1529.0
-offset_bottom = 857.0
+position = Vector2(1528, 856)
 scale = Vector2(200, 140)
 texture_normal = ExtResource("5_oc522")
 
