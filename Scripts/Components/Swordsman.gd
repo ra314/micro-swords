@@ -102,11 +102,11 @@ func _physics_process(delta):
 	# Updating sword location
 	# And flipping player sprite
 	var flipped_direction := false
-	if Utils.approx_equal(position.x, 256):
-		direction = ENUMS.DIRECTION.RIGHT
-		flipped_direction = true
-	elif Utils.approx_equal(position.x, 1568):
-		direction = ENUMS.DIRECTION.LEFT
+	if Utils.detect_collision("Walls", self):
+		if direction == ENUMS.DIRECTION.RIGHT:
+			direction = ENUMS.DIRECTION.LEFT
+		else:
+			direction = ENUMS.DIRECTION.RIGHT
 		flipped_direction = true
 	if flipped_direction:
 		update_character_x_scale()

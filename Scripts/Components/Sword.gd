@@ -53,10 +53,6 @@ func _physics_process(delta):
 				else:
 					direction = ENUMS.DIRECTION.RIGHT
 				can_switch_directions = false
-#			if Utils.approx_equal(position.x, 291):
-#				direction = ENUMS.DIRECTION.RIGHT
-#			elif Utils.approx_equal(position.x, 1629-16):
-#				direction = ENUMS.DIRECTION.LEFT
 			
 			# Set velocity based on direction
 			set_velocity_based_on_direction()
