@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://vr4m8fm5lv47"]
+[gd_scene load_steps=4 format=3 uid="uid://vr4m8fm5lv47"]
 
 [ext_resource type="Script" path="res://Scripts/Components/Sword.gd" id="1_bf0h4"]
-[ext_resource type="Texture2D" uid="uid://blh5yux4vhpop" path="res://Assets/Pixel Swords and Spears/Swords/sSword1.png" id="2_w72ic"]
+[ext_resource type="Texture2D" uid="uid://bdee0kt3lutik" path="res://Assets/Pixel Swords and Spears/Spears/sSpear2.png" id="3_frjli"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gyj8o"]
+size = Vector2(64.2393, 58.7314)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(0.25, 1)
@@ -13,14 +16,24 @@ script = ExtResource("1_bf0h4")
 texture_filter = 1
 rotation = -1.5708
 scale = Vector2(4.89256, 21.3988)
-texture = ExtResource("2_w72ic")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-12, -32, 12, -32, 12, 17, 32, 17, 32, 22, 12, 22, 12, 32, -12, 32, -12, 22, -32, 22, -32, 17, -12, 17)
+texture = ExtResource("3_frjli")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(-12, -32, 12, -32, 12, 17, 32, 17, 32, 22, 12, 22, 12, 32, -12, 32, -12, 22, -32, 22, -32, 17, -12, 17)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2(10.7158, -44.0314)
+shape = SubResource("RectangleShape2D_gyj8o")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-21.375, -14.6797, -42.7812, -14.6875, -42.7812, -4.88281, -0.03125, -4.88281, 0.0304174, 73.3796, 21.4361, 73.3889, 21.4062, -9.78125, -21.375, -9.78125)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(10.7158, -44.0314)
+shape = SubResource("RectangleShape2D_gyj8o")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-21.375, -14.6797, -42.7812, -14.6875, -42.7812, -4.88281, -0.03125, -4.88281, 0.0304174, 73.3796, 21.4361, 73.3889, 21.4062, -9.78125, -21.375, -9.78125)
