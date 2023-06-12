@@ -83,14 +83,16 @@ func rotate_arrow():
 	$Arrow.rotation_degrees = rot_deg
 
 func update_held_sword_location(sword: Sword):
-	sword.position = position-ConstData.DIR_TO_RELATIVE_SWORD_POS[direction]
+	var new_position = ConstData.DIR_TO_RELATIVE_SWORD_POS[direction]
+	$Arrow.global_position = position+new_position
+	sword.position = position+new_position
 
 func update_character_x_scale():
 	match direction:
 		ENUMS.DIRECTION.RIGHT:
-			$Sprite2D.scale.x = abs($Sprite2D.scale.x)
+			$Sprite2D.flip_h = false
 		ENUMS.DIRECTION.LEFT:
-			$Sprite2D.scale.x = abs($Sprite2D.scale.x) * -1
+			$Sprite2D.flip_h = true
 		_:
 			assert(false)
 
