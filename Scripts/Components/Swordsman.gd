@@ -49,6 +49,7 @@ func _ready():
 	root = get_parent()
 	scale = Vector2(1.5, 1.5)
 	update_held_sword_location(root.get_sword(held_item))
+	root.get_sword(held_item).last_holder = swordsman_name
 	$AnimationPlayer.play("Walk")
 #	debug_orig_y = position.y
 

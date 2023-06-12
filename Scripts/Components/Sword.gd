@@ -87,9 +87,13 @@ func action(_direction: ENUMS.DIRECTION, rot_deg: int):
 	direction = _direction
 	assert(state == ENUMS.SWORD_STATE.HELD)
 	var new_y = sin(deg_to_rad(abs(rot_deg)))*THROW_SPEED
-	hor_speed = abs(cos(deg_to_rad(abs(rot_deg)))*THROW_SPEED)
+	hor_speed = cos(deg_to_rad(abs(rot_deg)))*THROW_SPEED
+	if hor_speed > 0:
+		direction = ENUMS.DIRECTION.RIGHT
+	else:
+		direction = ENUMS.DIRECTION.LEFT
+	hor_speed = abs(hor_speed)
 	velocity.y = -new_y
-	set_velocity_based_on_direction()
 	state = ENUMS.SWORD_STATE.THROWN
 	can_switch_directions = true
 
