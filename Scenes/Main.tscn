@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cr3w4ih3a3mf7"]
+[gd_scene load_steps=10 format=3 uid="uid://cr3w4ih3a3mf7"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_2xt38"]
 [ext_resource type="PackedScene" uid="uid://uqbxmyga708p" path="res://Scenes/Levels/Level_2.tscn" id="3_apw3u"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dj5cpt4ffqy3x" path="res://Assets/dinoCharactersVersion1.1/sheets/mort.png" id="4_3bfrh"]
 [ext_resource type="Texture2D" uid="uid://ty0irhjgngai" path="res://Assets/dinoCharactersVersion1.1/sheets/tard.png" id="5_oc522"]
 [ext_resource type="Texture2D" uid="uid://bn7p0pj5mveno" path="res://Assets/more-info-icon.svg" id="6_p46ue"]
+[ext_resource type="AudioStream" uid="uid://cwt60cb4ntkcj" path="res://Assets/notification.wav" id="7_5g76h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uxvmv"]
 bg_color = Color(0.227451, 0.227451, 0.227451, 1)
@@ -98,3 +99,6 @@ text = "Credits:
  - Terrain was made by @PixelFrogStudio. (https://pixelfrog-assets.itch.io/pixel-adventure-1)
  - Game was coded up by ra314. (https://github.com/ra314)
  - Heavily inspired by the sword throwing game from MicroBattles2 by @DonutGames_. "
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_5g76h")

@@ -64,6 +64,8 @@ func get_other_swordsman_name(man: ENUMS.SWORDSMAN) -> ENUMS.SWORDSMAN:
 func died(man: ENUMS.SWORDSMAN):
 	score[get_other_swordsman_name(man)] += 1
 	update_ui()
+	flash_score(man)
+	make_sound()
 	# If both players die within RESET_PAUSE_TIME,
 	# we don't want reset to be called twice.
 	if resetting: return
@@ -72,9 +74,19 @@ func died(man: ENUMS.SWORDSMAN):
 	else:
 		get_tree().create_timer(RESET_PAUSE_TIME).timeout.connect(reset)
 	resetting = true
+func flash_score(man: ENUMS.SWORDSMAN):
+	match man:
+		ENUMS.SWORDSMAN.BLUE:
+			flash_green($BlueScore)
+		ENUMS.SWORDSMAN.BLACK:
+			flash_green($BlackScore)
+		_:
+			assert(false)
 func update_ui():
 	$BlackScore.text = str(score[ENUMS.SWORDSMAN.BLACK])
 	$BlueScore.text = str(score[ENUMS.SWORDSMAN.BLUE])
+func make_sound():
+	$AudioStreamPlayer2D.play()
 func randomize_spawns():
 	var spawns = $Level/Spawns.get_children()
 	var selected_spawn = Utils.select_random(spawns)
@@ -122,3 +134,10 @@ func restart_level():
 	score[ENUMS.SWORDSMAN.BLUE] = 0
 	update_ui()
 	reset()
+
+func flash_green(node: Label):
+	for i in range(5):
+		node.add_theme_color_override("font_color", Color(0, 1, 0))
+		await get_tree().create_timer(0.1).timeout
+		node.add_theme_color_override("font_color", Color(1, 1, 1))
+		await get_tree().create_timer(0.1).timeout
