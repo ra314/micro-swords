@@ -7,6 +7,7 @@ const THROW_SPEED = 1700
 @export var state: ENUMS.SWORD_STATE
 @export var sword_name: ENUMS.HELD_ITEM
 @export var direction: ENUMS.DIRECTION
+var last_holder: ENUMS.SWORDSMAN
 var hor_speed: float
 var root: Root
 # This is set to true, when thrown

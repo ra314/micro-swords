@@ -16,7 +16,6 @@ var rotating_clockwise := true
 @export var direction: ENUMS.DIRECTION
 @export var held_item: ENUMS.HELD_ITEM
 @export var swordsman_name: ENUMS.SWORDSMAN
-var last_held_item: ENUMS.HELD_ITEM
 var root: Root
 
 func init(_direction: ENUMS.DIRECTION, _swordsman_name: ENUMS.SWORDSMAN, _held_item: ENUMS.HELD_ITEM):
@@ -154,7 +153,7 @@ func respond_to_collision(sword: Sword):
 				print("pickup")
 				pickup_sword(sword)
 		ENUMS.SWORD_STATE.THROWN:
-			if last_held_item != sword.sword_name:
+			if swordsman_name != sword.last_holder:
 				if sword.time_in_air > ConstData.SWORD_THROWN_INVULNERABILITY_TIME:
 					print("die")
 					die()
@@ -177,6 +176,7 @@ func pickup_sword(sword: Sword):
 	update_held_sword_location(sword)
 	sword.state = ENUMS.SWORD_STATE.HELD
 	sword.rotation_degrees = 0
+	sword.last_holder = swordsman_name
 	# Prevent any collisions
 	sword.set_collision_mask_value(1, false)
 	sword.direction = direction
@@ -202,7 +202,6 @@ func action():
 		# Enable collision of sword with the ground
 		sword.set_collision_mask_value(1, true)
 		# Update held item
-		last_held_item = held_item
 		held_item = ENUMS.HELD_ITEM.NONE
 		
 		# Perform throw
