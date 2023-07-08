@@ -14,6 +14,6 @@ static func select_random(array: Array):
 static func detect_collision(collider_name: String, object: CharacterBody2D) -> bool:
 	for i in object.get_slide_collision_count():
 		var collider = object.get_slide_collision(i).get_collider()
-		if collider.name == collider_name:
+		if collider.name.contains(collider_name):
 			return true
 	return false

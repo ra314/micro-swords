@@ -9,6 +9,7 @@ func _ready():
 	connect_buttons_to_player_actions()
 	$Restart.button_down.connect(restart_level)
 	$Info.button_down.connect(show_info)
+	$Level.HigherWalls.visible=true
 
 func show_info():
 	get_tree().paused = not get_tree().paused

@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=3 uid="uid://gt5eqoav807"]
+
+[ext_resource type="Script" path="res://Scripts/Level Selector.gd" id="1_igpml"]
+[ext_resource type="PackedScene" uid="uid://b21sxdxpi5h1d" path="res://Scenes/Levels/Level_1.tscn" id="1_xgy2r"]
+[ext_resource type="PackedScene" uid="uid://uqbxmyga708p" path="res://Scenes/Levels/Level_2.tscn" id="2_uisig"]
+[ext_resource type="PackedScene" uid="uid://co878s4ouupkc" path="res://Scenes/Levels/Level_3.tscn" id="3_vnttu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8nryw"]
+bg_color = Color(0.176471, 0.176471, 0.176471, 1)
+
+[node name="Level Selector" type="Node2D"]
+script = ExtResource("1_igpml")
+
+[node name="Control_1" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1110.0
+
+[node name="Level_1" parent="Control_1" instance=ExtResource("1_xgy2r")]
+scale = Vector2(0.5, 0.5)
+
+[node name="Alpha" type="Label" parent="Control_1"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -121.5
+offset_right = 121.5
+offset_bottom = 106.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxFlat_8nryw")
+text = "ALPHA"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Control_1"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+offset_left = 96.0
+offset_right = 992.0
+offset_bottom = 480.0
+
+[node name="Control_2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1110.0
+offset_right = 2220.0
+
+[node name="Level_2" parent="Control_2" instance=ExtResource("2_uisig")]
+scale = Vector2(0.5, 0.5)
+
+[node name="Beta" type="Label" parent="Control_2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.5
+offset_right = 53.5
+offset_bottom = 106.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxFlat_8nryw")
+text = "BETA"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Control_2"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+offset_left = 96.0
+offset_right = 992.0
+offset_bottom = 480.0
+
+[node name="Control_3" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 555.0
+offset_top = 540.0
+offset_right = 1665.0
+offset_bottom = 540.0
+
+[node name="Level_3" parent="Control_3" instance=ExtResource("3_vnttu")]
+scale = Vector2(0.5, 0.5)
+
+[node name="Delta" type="Label" parent="Control_3"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -121.5
+offset_right = 121.5
+offset_bottom = 106.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxFlat_8nryw")
+text = "DELTA"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Control_3"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+offset_left = 96.0
+offset_right = 992.0
+offset_bottom = 480.0

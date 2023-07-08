@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://cr3w4ih3a3mf7"]
+[gd_scene load_steps=9 format=3 uid="uid://cr3w4ih3a3mf7"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_2xt38"]
-[ext_resource type="VideoStream" path="res://Assets/output.ogv" id="3_osdtc"]
 [ext_resource type="PackedScene" uid="uid://co878s4ouupkc" path="res://Scenes/Levels/Level_3.tscn" id="3_s00yn"]
 [ext_resource type="Texture2D" uid="uid://dj5cpt4ffqy3x" path="res://Assets/dinoCharactersVersion1.1/sheets/mort.png" id="4_3bfrh"]
 [ext_resource type="Texture2D" uid="uid://ty0irhjgngai" path="res://Assets/dinoCharactersVersion1.1/sheets/tard.png" id="5_oc522"]
@@ -37,14 +36,6 @@ theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxFlat_uxvmv")
 text = "0"
 horizontal_alignment = 1
-
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
-visible = false
-offset_top = 120.0
-offset_right = 3120.0
-offset_bottom = 1560.0
-scale = Vector2(0.614475, 0.583315)
-stream = ExtResource("3_osdtc")
 
 [node name="Level" parent="." instance=ExtResource("3_s00yn")]
 
