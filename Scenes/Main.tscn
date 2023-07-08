@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://cr3w4ih3a3mf7"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_2xt38"]
-[ext_resource type="PackedScene" uid="uid://uqbxmyga708p" path="res://Scenes/Levels/Level_2.tscn" id="3_apw3u"]
 [ext_resource type="VideoStream" path="res://Assets/output.ogv" id="3_osdtc"]
+[ext_resource type="PackedScene" uid="uid://co878s4ouupkc" path="res://Scenes/Levels/Level_3.tscn" id="3_s00yn"]
 [ext_resource type="Texture2D" uid="uid://dj5cpt4ffqy3x" path="res://Assets/dinoCharactersVersion1.1/sheets/mort.png" id="4_3bfrh"]
 [ext_resource type="Texture2D" uid="uid://ty0irhjgngai" path="res://Assets/dinoCharactersVersion1.1/sheets/tard.png" id="5_oc522"]
 [ext_resource type="Texture2D" uid="uid://bn7p0pj5mveno" path="res://Assets/more-info-icon.svg" id="6_p46ue"]
@@ -19,20 +19,20 @@ script = ExtResource("1_2xt38")
 metadata/_edit_horizontal_guides_ = [0.0]
 
 [node name="BlackScore" type="Label" parent="."]
-offset_left = 448.0
-offset_top = 856.0
-offset_right = 576.0
-offset_bottom = 996.0
+offset_left = 836.0
+offset_top = 941.0
+offset_right = 956.0
+offset_bottom = 1081.0
 theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxFlat_uxvmv")
 text = "0"
 horizontal_alignment = 1
 
 [node name="BlueScore" type="Label" parent="."]
-offset_left = 1344.0
-offset_top = 856.0
-offset_right = 1473.0
-offset_bottom = 996.0
+offset_left = 1255.0
+offset_top = 942.0
+offset_right = 1375.0
+offset_bottom = 1082.0
 theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxFlat_uxvmv")
 text = "0"
@@ -46,6 +46,8 @@ offset_bottom = 1560.0
 scale = Vector2(0.614475, 0.583315)
 stream = ExtResource("3_osdtc")
 
+[node name="Level" parent="." instance=ExtResource("3_s00yn")]
+
 [node name="Restart" type="Button" parent="."]
 visible = false
 offset_left = 787.0
@@ -54,8 +56,6 @@ offset_right = 1105.0
 offset_bottom = 955.0
 theme_override_font_sizes/font_size = 50
 text = "Restart?"
-
-[node name="Level" parent="." instance=ExtResource("3_apw3u")]
 
 [node name="WinText" type="Label" parent="."]
 visible = false
@@ -68,14 +68,14 @@ horizontal_alignment = 1
 
 [node name="Button1" type="TouchScreenButton" parent="."]
 texture_filter = 1
-position = Vector2(192, 856)
-scale = Vector2(200, 140)
+position = Vector2(87, 896)
+scale = Vector2(313, 151)
 texture_normal = ExtResource("4_3bfrh")
 
 [node name="Button2" type="TouchScreenButton" parent="."]
 texture_filter = 1
-position = Vector2(1528, 856)
-scale = Vector2(200, 140)
+position = Vector2(1821, 896)
+scale = Vector2(313, 151)
 texture_normal = ExtResource("5_oc522")
 
 [node name="Info" type="TextureButton" parent="."]
@@ -88,9 +88,9 @@ texture_normal = ExtResource("6_p46ue")
 [node name="Credits" type="Label" parent="."]
 visible = false
 z_index = 1
-offset_top = 160.0
-offset_right = 1920.0
-offset_bottom = 512.0
+offset_left = 148.0
+offset_right = 2021.0
+offset_bottom = 348.0
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_bgc1i")
 text = "Credits:
@@ -98,7 +98,8 @@ text = "Credits:
  - Spear sprite was made by turkish-coffee. (https://turkish-coffee.itch.io/pixel-swords-and-spears)
  - Terrain was made by @PixelFrogStudio. (https://pixelfrog-assets.itch.io/pixel-adventure-1)
  - Game was coded up by ra314. (https://github.com/ra314)
- - Heavily inspired by the sword throwing game from MicroBattles2 by @DonutGames_. "
+ - Heavily inspired by the sword throwing game from MicroBattles2 by @DonutGames_. 
+ - With lots of play testing and advice from my friend Allan. (https://goldendeagle.itch.io/)"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_5g76h")
