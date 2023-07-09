@@ -1,8 +1,6 @@
 extends CharacterBody2D
 class_name Sword
 
-# Top height for a 90 degree throw should be 5 body heights
-const THROW_SPEED = 1700
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 @export var state: ENUMS.SWORD_STATE
 @export var sword_name: ENUMS.HELD_ITEM
@@ -86,8 +84,8 @@ func become_grounded():
 func action(_direction: ENUMS.DIRECTION, rot_deg: int):
 	direction = _direction
 	assert(state == ENUMS.SWORD_STATE.HELD)
-	var new_y = sin(deg_to_rad(abs(rot_deg)))*THROW_SPEED
-	hor_speed = cos(deg_to_rad(abs(rot_deg)))*THROW_SPEED
+	var new_y = sin(deg_to_rad(abs(rot_deg)))*ConstData.THROW_SPEED
+	hor_speed = cos(deg_to_rad(abs(rot_deg)))*ConstData.THROW_SPEED
 	if hor_speed > 0:
 		direction = ENUMS.DIRECTION.RIGHT
 	else:

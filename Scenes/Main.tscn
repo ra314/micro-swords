@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cr3w4ih3a3mf7"]
+[gd_scene load_steps=9 format=3 uid="uid://cr3w4ih3a3mf7"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_2xt38"]
 [ext_resource type="Texture2D" uid="uid://dj5cpt4ffqy3x" path="res://Assets/dinoCharactersVersion1.1/sheets/mort.png" id="4_3bfrh"]
@@ -8,6 +8,9 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uxvmv"]
 bg_color = Color(0.227451, 0.227451, 0.227451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fwr72"]
+bg_color = Color(1, 0.533333, 0.101961, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgc1i"]
 bg_color = Color(0.227451, 0.227451, 0.227451, 1)
@@ -70,6 +73,7 @@ offset_right = 517.0
 offset_bottom = 276.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 200
+theme_override_styles/normal = SubResource("StyleBoxFlat_fwr72")
 text = "It's A Draw"
 horizontal_alignment = 1
 

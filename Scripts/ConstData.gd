@@ -16,6 +16,8 @@ const GRAVITY = 4500
 const WIN_SCORE = 5
 # 2 frames at 60 fps
 const SWORD_THROWN_INVULNERABILITY_TIME = 2/60
+# Top height for a 90 degree throw should be 5 body heights
+const THROW_SPEED = 2000
 
 #Player: H17, W16
 #Platform Ground: W58
