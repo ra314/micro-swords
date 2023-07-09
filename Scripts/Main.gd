@@ -1,7 +1,11 @@
-extends Node2D
+extends Control
 class_name Root
 var score := {ENUMS.SWORDSMAN.BLACK: 0, ENUMS.SWORDSMAN.BLUE: 0}
 const RESET_PAUSE_TIME = 3.0
+var root: Root3
+
+func set_level(node):
+	$Level_Holder.add_child(node)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,7 +13,8 @@ func _ready():
 	connect_buttons_to_player_actions()
 	$Restart.button_down.connect(restart_level)
 	$Info.button_down.connect(show_info)
-	$Level.HigherWalls.visible=true
+	$Level_Holder/Level/HigherWalls.visible=true
+	root = get_parent().get_parent()
 
 func show_info():
 	get_tree().paused = not get_tree().paused
@@ -89,7 +94,7 @@ func update_ui():
 func make_sound():
 	$AudioStreamPlayer2D.play()
 func randomize_spawns():
-	var spawns = $Level/Spawns.get_children()
+	var spawns = $Level_Holder/Level/Spawns.get_children()
 	var selected_spawn = Utils.select_random(spawns)
 	#var selected_spawn = spawns[1]
 	$Black.position = selected_spawn.get_node("Black").position
@@ -121,20 +126,17 @@ func show_win_screen():
 	if black_wins and blue_wins:
 		$WinText.text = "It's a Draw"
 	elif black_wins:
-		$WinText.text = "Black Wins"
+		$WinText.text = "Red Wins"
 	elif blue_wins:
-		$WinText.text = "Blue Wins"
+		$WinText.text = "Yellow Wins"
 	else:
 		assert(false)
 	$WinText.visible = true
 	$Restart.visible = true
+
 func restart_level():
-	$WinText.visible = false
-	$Restart.visible = false
-	score[ENUMS.SWORDSMAN.BLACK] = 0
-	score[ENUMS.SWORDSMAN.BLUE] = 0
-	update_ui()
-	reset()
+	var level_selector = load("res://Scenes/Level Selector.tscn").instantiate()
+	root.put_in_container(level_selector)
 
 func flash_green(node: Label):
 	for i in range(5):

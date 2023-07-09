@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cr3w4ih3a3mf7"]
+[gd_scene load_steps=8 format=3 uid="uid://cr3w4ih3a3mf7"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_2xt38"]
-[ext_resource type="PackedScene" uid="uid://co878s4ouupkc" path="res://Scenes/Levels/Level_3.tscn" id="3_s00yn"]
 [ext_resource type="Texture2D" uid="uid://dj5cpt4ffqy3x" path="res://Assets/dinoCharactersVersion1.1/sheets/mort.png" id="4_3bfrh"]
 [ext_resource type="Texture2D" uid="uid://ty0irhjgngai" path="res://Assets/dinoCharactersVersion1.1/sheets/tard.png" id="5_oc522"]
 [ext_resource type="Texture2D" uid="uid://bn7p0pj5mveno" path="res://Assets/more-info-icon.svg" id="6_p46ue"]
@@ -13,7 +12,11 @@ bg_color = Color(0.227451, 0.227451, 0.227451, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgc1i"]
 bg_color = Color(0.227451, 0.227451, 0.227451, 1)
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 2220.0
+offset_bottom = 1080.0
 script = ExtResource("1_2xt38")
 metadata/_edit_horizontal_guides_ = [0.0]
 
@@ -37,22 +40,35 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_uxvmv")
 text = "0"
 horizontal_alignment = 1
 
-[node name="Level" parent="." instance=ExtResource("3_s00yn")]
+[node name="Level_Holder" type="Node" parent="."]
 
 [node name="Restart" type="Button" parent="."]
 visible = false
-offset_left = 787.0
-offset_top = 821.0
-offset_right = 1105.0
-offset_bottom = 955.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.0
+offset_top = -67.0
+offset_right = 159.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "Restart?"
 
 [node name="WinText" type="Label" parent="."]
 visible = false
-offset_left = 384.0
-offset_right = 1536.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -517.0
+offset_right = 517.0
 offset_bottom = 276.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 200
 text = "It's A Draw"
 horizontal_alignment = 1
