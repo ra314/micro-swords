@@ -1,0 +1,142 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwxpf8kvwjppq"]
+
+[ext_resource type="Script" path="res://Scripts/Settings.gd" id="1_hcaqw"]
+[ext_resource type="Texture2D" uid="uid://5150remwt8vn" path="res://Assets/check.svg" id="2_72m3n"]
+[ext_resource type="Texture2D" uid="uid://b7fohabtmjfhr" path="res://Assets/cross.svg" id="3_l658a"]
+[ext_resource type="Texture2D" uid="uid://dy2634y5831sw" path="res://Assets/back-arrow.svg" id="4_s3nhn"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 2220.0
+offset_bottom = 1080.0
+script = ExtResource("1_hcaqw")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 2000.0
+offset_bottom = 1163.0
+
+[node name="CheckBox" type="CheckBox" parent="VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+theme_override_icons/checked = ExtResource("2_72m3n")
+theme_override_icons/unchecked = ExtResource("3_l658a")
+keep_pressed_outside = true
+text = "Variable Jump Height"
+
+[node name="CheckBox2" type="CheckBox" parent="VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+theme_override_icons/checked = ExtResource("2_72m3n")
+theme_override_icons/unchecked = ExtResource("3_l658a")
+keep_pressed_outside = true
+text = "Separate Buttons for Jump and Throw"
+
+[node name="CheckBox3" type="CheckBox" parent="VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+theme_override_icons/checked = ExtResource("2_72m3n")
+theme_override_icons/unchecked = ExtResource("3_l658a")
+keep_pressed_outside = true
+text = "Double Jump"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "Gravity"
+
+[node name="HSlider" type="HSlider" parent="VBox/HBoxContainer"]
+custom_minimum_size = Vector2(1200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+value = 50.0
+scrollable = false
+tick_count = 10
+ticks_on_borders = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "Throw Power"
+
+[node name="HSlider" type="HSlider" parent="VBox/HBoxContainer2"]
+custom_minimum_size = Vector2(1200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+value = 50.0
+scrollable = false
+tick_count = 10
+ticks_on_borders = true
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "Movement Speed"
+
+[node name="HSlider" type="HSlider" parent="VBox/HBoxContainer3"]
+custom_minimum_size = Vector2(1200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+value = 50.0
+scrollable = false
+tick_count = 10
+ticks_on_borders = true
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/HBoxContainer4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "Jump Height"
+
+[node name="HSlider" type="HSlider" parent="VBox/HBoxContainer4"]
+custom_minimum_size = Vector2(1200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+value = 50.0
+scrollable = false
+tick_count = 10
+ticks_on_borders = true
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/HBoxContainer5"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "Rotation Speed"
+
+[node name="HSlider" type="HSlider" parent="VBox/HBoxContainer5"]
+custom_minimum_size = Vector2(1200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+value = 50.0
+scrollable = false
+tick_count = 10
+ticks_on_borders = true
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -123.0
+offset_bottom = 123.0
+grow_horizontal = 0
+texture_normal = ExtResource("4_s3nhn")

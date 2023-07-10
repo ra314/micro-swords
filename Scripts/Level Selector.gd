@@ -7,6 +7,7 @@ func _ready():
 	$Control_1/Button.button_up.connect(func(): load_level(1))
 	$Control_2/Button.button_up.connect(func(): load_level(2))
 	$Control_3/Button.button_up.connect(func(): load_level(3))
+	$Control_4/TextureButton.button_up.connect(load_settings)
 	root = get_parent().get_parent()
 
 func load_level(level_number: int):
@@ -15,3 +16,7 @@ func load_level(level_number: int):
 	var ui = load("res://Scenes/Main.tscn").instantiate()
 	ui.set_level(level)
 	root.put_in_container(ui)
+
+func load_settings():
+	var settings = load("res://Scenes/Settings.tscn").instantiate()
+	root.put_in_container(settings)
