@@ -166,7 +166,6 @@ func respond_to_collision(sword: Sword):
 			pass
 		ENUMS.SWORD_STATE.GROUNDED:
 			if held_item == ENUMS.HELD_ITEM.NONE:
-				print("pickup")
 				pickup_sword(sword)
 		ENUMS.SWORD_STATE.THROWN:
 			if swordsman_name != sword.last_holder:
@@ -204,6 +203,8 @@ func pickup_sword(sword: Sword):
 			$Arrow.rotation_degrees = -180
 		_:
 			assert(false)
+	# Update UI
+	root.update_button_icon(held_item, swordsman_name)
 
 func action():
 	# JUMP
@@ -224,3 +225,6 @@ func action():
 		# Perform throw
 		sword.action(direction, rot_deg)
 		$Arrow.visible = false
+		
+		# Update UI
+		root.update_button_icon(held_item, swordsman_name)

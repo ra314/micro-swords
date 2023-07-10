@@ -21,16 +21,14 @@ func show_info():
 	$Credits.visible = not $Credits.visible
 
 func connect_buttons_to_player_actions():
-	#Utils.disconnect_all($Button1.button_down)
-	#Utils.disconnect_all($Button2.button_down)
-	$Button1.pressed.connect($Black.action)
-	$Button2.pressed.connect($Blue.action)
+	$BlackButton/Button.pressed.connect($Black.action)
+	$BlueButton/Button.pressed.connect($Blue.action)
 
 func get_button(man: ENUMS.SWORDSMAN) -> TouchScreenButton:
 	if man == ENUMS.SWORDSMAN.BLACK:
-		return $Button1
+		return $BlackButton/Button
 	if man == ENUMS.SWORDSMAN.BLUE:
-		return $Button2
+		return $BlueButton/Button
 	assert(false)
 	return null
 
@@ -99,6 +97,20 @@ func flash_score(man: ENUMS.SWORDSMAN):
 func update_ui():
 	$BlackScore.text = str(score[ENUMS.SWORDSMAN.BLACK])
 	$BlueScore.text = str(score[ENUMS.SWORDSMAN.BLUE])
+
+func update_button_icon(held_item: ENUMS.HELD_ITEM, swordsman: ENUMS.SWORDSMAN):
+	var button_control_node: Control
+	if swordsman == ENUMS.SWORDSMAN.BLACK:
+		button_control_node = $BlackButton
+	else:
+		button_control_node = $BlueButton
+	if held_item == ENUMS.HELD_ITEM.NONE:
+		button_control_node.get_node("SpearIcon").visible = false
+		button_control_node.get_node("JumpIcon").visible = true
+	else:
+		button_control_node.get_node("SpearIcon").visible = true
+		button_control_node.get_node("JumpIcon").visible = false
+
 func make_sound():
 	$AudioStreamPlayer2D.play()
 func randomize_spawns():
