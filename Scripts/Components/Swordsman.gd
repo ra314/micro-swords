@@ -95,6 +95,7 @@ func update_character_x_scale():
 
 func is_still_holding_jump(delta: float) -> bool:
 	if not Input.is_action_pressed(action_name):
+		# TODO configure separate button to also accept the ui button
 		if not root.get_button(swordsman_name).is_pressed():
 			return false
 	if time_in_air > ConstData.MAX_JUMP_HOLD_TIME:
@@ -149,8 +150,14 @@ func _physics_process(delta):
 	move_and_slide()
 	detect_and_respond_to_sword_collision()
 	
-	if Input.is_action_just_pressed(action_name):
-		action()
+	if ConstData.SEPARATE_BUTTONS:
+		if Input.is_action_just_pressed(action_name):
+			jump()
+		if Input.is_action_just_pressed(action_name+str(2)):
+			throw()
+	else:
+		if Input.is_action_just_pressed(action_name):
+			action()
 
 func detect_and_respond_to_sword_collision() -> bool:
 	var detected := false
@@ -206,25 +213,39 @@ func pickup_sword(sword: Sword):
 	# Update UI
 	root.update_button_icon(held_item, swordsman_name)
 
+func can_jump() -> bool:
+	if is_on_floor():
+		if ConstData.SEPARATE_BUTTONS:
+			return true
+		if held_item == ENUMS.HELD_ITEM.NONE:
+			return true
+	return false
+
+func jump():
+	velocity.y = -ConstData.JUMP_VELOCITY
+	holding_jump = true
+
+func can_throw():
+	return held_item != ENUMS.HELD_ITEM.NONE
+
+func throw():
+	var other_swordsman := root.get_other_swordsman(swordsman_name)
+	var sword: Sword = root.get_sword(held_item)
+	
+	# Enable collision of sword with the ground
+	sword.set_collision_mask_value(1, true)
+	# Update held item
+	held_item = ENUMS.HELD_ITEM.NONE
+	
+	# Perform throw
+	sword.action(direction, rot_deg)
+	$Arrow.visible = false
+	
+	# Update UI
+	root.update_button_icon(held_item, swordsman_name)
+
 func action():
-	# JUMP
-	if held_item == ENUMS.HELD_ITEM.NONE:
-		if is_on_floor():
-			velocity.y = -ConstData.JUMP_VELOCITY
-			holding_jump = true
-	# THROW
-	else:
-		var other_swordsman := root.get_other_swordsman(swordsman_name)
-		var sword: Sword = root.get_sword(held_item)
-		
-		# Enable collision of sword with the ground
-		sword.set_collision_mask_value(1, true)
-		# Update held item
-		held_item = ENUMS.HELD_ITEM.NONE
-		
-		# Perform throw
-		sword.action(direction, rot_deg)
-		$Arrow.visible = false
-		
-		# Update UI
-		root.update_button_icon(held_item, swordsman_name)
+	if can_throw():
+		return throw()
+	elif can_jump():
+		return jump()
