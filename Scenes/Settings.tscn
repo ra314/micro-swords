@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwxpf8kvwjppq"]
+[gd_scene load_steps=7 format=3 uid="uid://dwxpf8kvwjppq"]
 
 [ext_resource type="Script" path="res://Scripts/Settings.gd" id="1_hcaqw"]
 [ext_resource type="Texture2D" uid="uid://5150remwt8vn" path="res://Assets/check.svg" id="2_72m3n"]
 [ext_resource type="Texture2D" uid="uid://b7fohabtmjfhr" path="res://Assets/cross.svg" id="3_l658a"]
 [ext_resource type="Texture2D" uid="uid://dy2634y5831sw" path="res://Assets/back-arrow.svg" id="4_s3nhn"]
+[ext_resource type="PackedScene" uid="uid://b2yn0vj40xarn" path="res://Scenes/Components/Numpad.tscn" id="5_qv2mv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1mrep"]
+bg_color = Color(0.803922, 0.27451, 0.247059, 1)
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -17,7 +21,7 @@ layout_mode = 0
 offset_right = 2000.0
 offset_bottom = 1163.0
 
-[node name="CheckBox" type="CheckBox" parent="VBox"]
+[node name="variable_jump_height" type="CheckBox" parent="VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 theme_override_icons/checked = ExtResource("2_72m3n")
@@ -25,7 +29,7 @@ theme_override_icons/unchecked = ExtResource("3_l658a")
 keep_pressed_outside = true
 text = "Variable Jump Height"
 
-[node name="CheckBox2" type="CheckBox" parent="VBox"]
+[node name="separate_buttons" type="CheckBox" parent="VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 theme_override_icons/checked = ExtResource("2_72m3n")
@@ -33,7 +37,7 @@ theme_override_icons/unchecked = ExtResource("3_l658a")
 keep_pressed_outside = true
 text = "Separate Buttons for Jump and Throw"
 
-[node name="CheckBox3" type="CheckBox" parent="VBox"]
+[node name="double_jump" type="CheckBox" parent="VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 theme_override_icons/checked = ExtResource("2_72m3n")
@@ -41,113 +45,189 @@ theme_override_icons/unchecked = ExtResource("3_l658a")
 keep_pressed_outside = true
 text = "Double Jump"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBox"]
+[node name="GRAVITY" type="HBoxContainer" parent="VBox"]
+custom_minimum_size = Vector2(1500, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 
-[node name="Label" type="Label" parent="VBox/HBoxContainer"]
+[node name="Label" type="Label" parent="VBox/GRAVITY"]
+custom_minimum_size = Vector2(510, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 70
-text = "Gravity"
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+text = "Gravity:"
 
-[node name="HSlider" type="HSlider" parent="VBox/HBoxContainer"]
-custom_minimum_size = Vector2(1200, 0)
+[node name="Label2" type="Button" parent="VBox/GRAVITY"]
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 1
-value = 50.0
-scrollable = false
-tick_count = 10
-ticks_on_borders = true
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_1mrep")
+text = "3000"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBox"]
+[node name="Label3" type="Label" parent="VBox/GRAVITY"]
+custom_minimum_size = Vector2(650, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+text = "min: 1000, max: 10000"
+horizontal_alignment = 2
 
-[node name="Label" type="Label" parent="VBox/HBoxContainer2"]
+[node name="WIN_SCORE" type="HBoxContainer" parent="VBox"]
+custom_minimum_size = Vector2(1500, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 70
-text = "Throw Power"
+size_flags_horizontal = 0
 
-[node name="HSlider" type="HSlider" parent="VBox/HBoxContainer2"]
-custom_minimum_size = Vector2(1200, 0)
+[node name="Label" type="Label" parent="VBox/WIN_SCORE"]
+custom_minimum_size = Vector2(510, 0)
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 1
-value = 50.0
-scrollable = false
-tick_count = 10
-ticks_on_borders = true
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBox"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBox/HBoxContainer3"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 70
-text = "Movement Speed"
-
-[node name="HSlider" type="HSlider" parent="VBox/HBoxContainer3"]
-custom_minimum_size = Vector2(1200, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 1
-value = 50.0
-scrollable = false
-tick_count = 10
-ticks_on_borders = true
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="VBox"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBox/HBoxContainer4"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 70
-text = "Jump Height"
-
-[node name="HSlider" type="HSlider" parent="VBox/HBoxContainer4"]
-custom_minimum_size = Vector2(1200, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 1
-value = 50.0
-scrollable = false
-tick_count = 10
-ticks_on_borders = true
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="VBox"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBox/HBoxContainer5"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 70
-text = "Rotation Speed"
-
-[node name="HSlider" type="HSlider" parent="VBox/HBoxContainer5"]
-custom_minimum_size = Vector2(1200, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 1
-value = 50.0
-scrollable = false
-tick_count = 10
-ticks_on_borders = true
-
-[node name="HBoxContainer6" type="HBoxContainer" parent="VBox"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBox/HBoxContainer6"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 60
 text = "Win Score"
 
-[node name="HSlider" type="HSlider" parent="VBox/HBoxContainer6"]
-custom_minimum_size = Vector2(1200, 0)
+[node name="Label2" type="Button" parent="VBox/WIN_SCORE"]
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 1
-value = 50.0
-scrollable = false
-tick_count = 10
-ticks_on_borders = true
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_1mrep")
+text = "3000"
+
+[node name="Label3" type="Label" parent="VBox/WIN_SCORE"]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+text = "min: 20, max: 10000"
+horizontal_alignment = 2
+
+[node name="THROW_SPEED" type="HBoxContainer" parent="VBox"]
+custom_minimum_size = Vector2(1500, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="VBox/THROW_SPEED"]
+custom_minimum_size = Vector2(510, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Throw Power"
+
+[node name="Label2" type="Button" parent="VBox/THROW_SPEED"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_1mrep")
+text = "3000"
+
+[node name="Label3" type="Label" parent="VBox/THROW_SPEED"]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+text = "min: 20, max: 10000"
+horizontal_alignment = 2
+
+[node name="SPEED" type="HBoxContainer" parent="VBox"]
+custom_minimum_size = Vector2(1500, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="VBox/SPEED"]
+custom_minimum_size = Vector2(510, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Movement Speed"
+
+[node name="Label2" type="Button" parent="VBox/SPEED"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_1mrep")
+text = "3000"
+
+[node name="Label3" type="Label" parent="VBox/SPEED"]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+text = "min: 20, max: 10000"
+horizontal_alignment = 2
+
+[node name="JUMP_VELOCITY" type="HBoxContainer" parent="VBox"]
+custom_minimum_size = Vector2(1500, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="VBox/JUMP_VELOCITY"]
+custom_minimum_size = Vector2(510, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Jump Speed"
+
+[node name="Label2" type="Button" parent="VBox/JUMP_VELOCITY"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_1mrep")
+text = "3000"
+
+[node name="Label3" type="Label" parent="VBox/JUMP_VELOCITY"]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+text = "min: 20, max: 10000"
+horizontal_alignment = 2
+
+[node name="MAX_ROT_RANGE_DEG" type="HBoxContainer" parent="VBox"]
+custom_minimum_size = Vector2(1500, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="VBox/MAX_ROT_RANGE_DEG"]
+custom_minimum_size = Vector2(510, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Rotation Extent"
+
+[node name="Label2" type="Button" parent="VBox/MAX_ROT_RANGE_DEG"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_1mrep")
+text = "3000"
+
+[node name="Label3" type="Label" parent="VBox/MAX_ROT_RANGE_DEG"]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+text = "min: 20, max: 10000"
+horizontal_alignment = 2
+
+[node name="ROT_SPEED" type="HBoxContainer" parent="VBox"]
+custom_minimum_size = Vector2(1500, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="VBox/ROT_SPEED"]
+custom_minimum_size = Vector2(510, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Rotation Speed
+"
+
+[node name="Label2" type="Button" parent="VBox/ROT_SPEED"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_1mrep")
+text = "3000"
+
+[node name="Label3" type="Label" parent="VBox/ROT_SPEED"]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+text = "min: 20, max: 10000"
+horizontal_alignment = 2
 
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 1
@@ -158,3 +238,10 @@ offset_left = -123.0
 offset_bottom = 123.0
 grow_horizontal = 0
 texture_normal = ExtResource("4_s3nhn")
+
+[node name="Numpad" parent="." instance=ExtResource("5_qv2mv")]
+offset_left = 1756.0
+offset_top = 456.0
+offset_right = 1756.0
+offset_bottom = 456.0
+scale = Vector2(0.75, 0.75)

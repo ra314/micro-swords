@@ -23,7 +23,7 @@ var THROW_SPEED := 2000
 # const SPEED := 64*4
 var SPEED := 350
 # Max jump height needs to be 3 times character height
-var JUMP_VELOCITY := -1500
+var JUMP_VELOCITY := 1200
 var MAX_ROT_RANGE_DEG := 120
 var ROT_SPEED := 4
 
@@ -32,9 +32,15 @@ const DEFAULTS := {
 	"WIN_SCORE": [1, 20, 5],
 	"THROW_SPEED": [500, 5000, 2000],
 	"SPEED": [100, 1000, 350],
-	"JUMP_VELOCITY": [0, -10000, -1500],
+	"JUMP_VELOCITY": [0, 10000, 1200],
 	"MAX_ROT_RANGE_DEG": [0, 180, 120],
 	"ROT_SPEED": [0, 50, 4]}
+
+var MAX_JUMP_HOLD_TIME := 0.3
+var REDUCED_GRAVITY_WHEN_HOLDING_JUMP := 2250
+var VARIABLE_JUMP_HEIGHT := false
+var DOUBLE_JUMP := false
+var SEPARATE_BUTTONS := false
 
 #Player: H17, W16
 #Platform Ground: W58

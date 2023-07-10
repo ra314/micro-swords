@@ -3,6 +3,10 @@ class_name Swordsman
 
 var rot_deg := 0
 var rotating_clockwise := true
+var holding_jump := false
+var action_name
+# Time spent after jumping before being grounded.
+var time_in_air := 0.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 @export var direction: ENUMS.DIRECTION
@@ -26,6 +30,7 @@ func init(_direction: ENUMS.DIRECTION, _swordsman_name: ENUMS.SWORDSMAN, _held_i
 			$Sprite2D.texture = load("res://Assets/dinoCharactersVersion1.1/sheets/DinoSprites - tard.png")
 		_:
 			assert(false)
+	action_name = name.to_upper()
 	match direction:
 		ENUMS.DIRECTION.RIGHT:
 			rotating_clockwise = false
@@ -88,11 +93,25 @@ func update_character_x_scale():
 		_:
 			assert(false)
 
+func is_still_holding_jump(delta: float) -> bool:
+	if not Input.is_action_pressed(action_name):
+		return false
+	if time_in_air > ConstData.MAX_JUMP_HOLD_TIME:
+		return false
+	return true
+
 func _physics_process(delta):
-	print(ConstData)
 	# Add the gravity.
 	if not is_on_floor():
-		velocity.y += ConstData.GRAVITY * delta
+		time_in_air += delta
+		holding_jump = is_still_holding_jump(delta)
+		if holding_jump:
+			velocity.y += ConstData.REDUCED_GRAVITY_WHEN_HOLDING_JUMP * delta
+		else:
+			velocity.y += ConstData.GRAVITY * delta
+	else:
+		time_in_air = 0
+		holding_jump = false
 	
 	# Handle switching directions
 	# Updating sword location
@@ -127,8 +146,6 @@ func _physics_process(delta):
 	move_and_slide()
 	detect_and_respond_to_sword_collision()
 	
-	# Use is_action_pressed when no held item, to allow for bunny hopping
-	var action_name = ENUMS.SWORDSMAN.keys()[swordsman_name]
 	if Input.is_action_just_pressed(action_name):
 		action()
 
@@ -189,7 +206,8 @@ func action():
 	# JUMP
 	if held_item == ENUMS.HELD_ITEM.NONE:
 		if is_on_floor():
-			velocity.y = ConstData.JUMP_VELOCITY
+			velocity.y = -ConstData.JUMP_VELOCITY
+			holding_jump = true
 	# THROW
 	else:
 		var other_swordsman := root.get_other_swordsman(swordsman_name)
