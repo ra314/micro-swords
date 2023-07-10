@@ -6,12 +6,18 @@ var last_selected_button: Button
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$TextureButton.button_up.connect(load_level_selector)
+	init_check_boxes()
 	init_text()
 	init_buttons()
-	$VBox/double_jump.button_up.connect(func(): ConstData.DOUBLE_JUMP = !ConstData.DOUBLE_JUMP)
-	$VBox/variable_jump_height.button_up.connect(func(): ConstData.VARIABLE_JUMP_HEIGHT = !ConstData.VARIABLE_JUMP_HEIGHT)
-	$VBox/separate_buttons.button_up.connect(func(): ConstData.SEPARATE_BUTTONS = !ConstData.SEPARATE_BUTTONS)
+	$VBox/DOUBLE_JUMP.button_up.connect(func(): ConstData.DOUBLE_JUMP = !ConstData.DOUBLE_JUMP)
+	$VBox/VARIABLE_JUMP_HEIGHT.button_up.connect(func(): ConstData.VARIABLE_JUMP_HEIGHT = !ConstData.VARIABLE_JUMP_HEIGHT)
+	$VBox/SEPARATE_BUTTONS.button_up.connect(func(): ConstData.SEPARATE_BUTTONS = !ConstData.SEPARATE_BUTTONS)
 	root = get_parent().get_parent()
+
+func init_check_boxes():
+	$VBox/VARIABLE_JUMP_HEIGHT.button_pressed = ConstData.VARIABLE_JUMP_HEIGHT
+	$VBox/DOUBLE_JUMP.button_pressed = ConstData.DOUBLE_JUMP
+	$VBox/SEPARATE_BUTTONS.button_pressed = ConstData.SEPARATE_BUTTONS
 
 func init_text():
 	for child in $VBox.get_children():
@@ -28,6 +34,7 @@ func init_buttons():
 	for child in $VBox.get_children():
 		if child is HBoxContainer:
 			var button: Button
+			button = child.get_node("Label2")
 			button.button_up.connect(func(): last_selected_button = button)
 
 func load_level_selector():

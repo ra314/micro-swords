@@ -99,6 +99,8 @@ func is_still_holding_jump(delta: float) -> bool:
 			return false
 	if time_in_air > ConstData.MAX_JUMP_HOLD_TIME:
 		return false
+	if not ConstData.VARIABLE_JUMP_HEIGHT:
+		return false
 	return true
 
 func _physics_process(delta):

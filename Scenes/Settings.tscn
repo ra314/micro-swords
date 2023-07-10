@@ -21,7 +21,7 @@ layout_mode = 0
 offset_right = 2000.0
 offset_bottom = 1163.0
 
-[node name="variable_jump_height" type="CheckBox" parent="VBox"]
+[node name="VARIABLE_JUMP_HEIGHT" type="CheckBox" parent="VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 theme_override_icons/checked = ExtResource("2_72m3n")
@@ -29,7 +29,7 @@ theme_override_icons/unchecked = ExtResource("3_l658a")
 keep_pressed_outside = true
 text = "Variable Jump Height"
 
-[node name="separate_buttons" type="CheckBox" parent="VBox"]
+[node name="SEPARATE_BUTTONS" type="CheckBox" parent="VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 theme_override_icons/checked = ExtResource("2_72m3n")
@@ -37,7 +37,7 @@ theme_override_icons/unchecked = ExtResource("3_l658a")
 keep_pressed_outside = true
 text = "Separate Buttons for Jump and Throw"
 
-[node name="double_jump" type="CheckBox" parent="VBox"]
+[node name="DOUBLE_JUMP" type="CheckBox" parent="VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 theme_override_icons/checked = ExtResource("2_72m3n")
