@@ -23,7 +23,7 @@ var THROW_SPEED := 2000
 # const SPEED := 64*4
 var SPEED := 350
 # Max jump height needs to be 3 times character height
-var JUMP_VELOCITY := 1200
+var JUMP_VELOCITY := 1500
 var MAX_ROT_RANGE_DEG := 120
 var ROT_SPEED := 4
 
