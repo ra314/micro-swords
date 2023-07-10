@@ -1,14 +1,6 @@
 extends CharacterBody2D
 class_name Swordsman
 
-# 4 bodylengths per second
-# const SPEED := 64*4
-const SPEED := 350
-# Max jump height needs to be 3 times character height
-const JUMP_VELOCITY := -1500
-
-const MAX_ROT_RANGE_DEG := 120
-const ROT_SPEED := 4
 var rot_deg := 0
 var rotating_clockwise := true
 
@@ -58,9 +50,9 @@ func flip_rotation():
 
 func rotate_arrow():
 	if rotating_clockwise:
-		rot_deg += ROT_SPEED
+		rot_deg += ConstData.ROT_SPEED
 	else:
-		rot_deg -= ROT_SPEED
+		rot_deg -= ConstData.ROT_SPEED
 	match rotating_clockwise:
 		true:
 			match direction:
@@ -73,7 +65,7 @@ func rotate_arrow():
 		false:
 			match direction:
 				ENUMS.DIRECTION.RIGHT:
-					if rot_deg <= -120: flip_rotation()
+					if rot_deg <= -ConstData.MAX_ROT_RANGE_DEG: flip_rotation()
 				ENUMS.DIRECTION.LEFT:
 					if rot_deg <= -180: flip_rotation()
 				_:
@@ -97,6 +89,7 @@ func update_character_x_scale():
 			assert(false)
 
 func _physics_process(delta):
+	print(ConstData)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += ConstData.GRAVITY * delta
@@ -118,9 +111,9 @@ func _physics_process(delta):
 	
 	# Set velocity based on direction
 	if direction == ENUMS.DIRECTION.RIGHT:
-		velocity.x = SPEED
+		velocity.x = ConstData.SPEED
 	else:
-		velocity.x = -SPEED
+		velocity.x = -ConstData.SPEED
 	
 	if held_item != ENUMS.HELD_ITEM.NONE:
 		# Sync sword velocity with swordsman velocity
@@ -196,7 +189,7 @@ func action():
 	# JUMP
 	if held_item == ENUMS.HELD_ITEM.NONE:
 		if is_on_floor():
-			velocity.y = JUMP_VELOCITY
+			velocity.y = ConstData.JUMP_VELOCITY
 	# THROW
 	else:
 		var other_swordsman := root.get_other_swordsman(swordsman_name)

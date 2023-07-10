@@ -19,7 +19,7 @@ offset_bottom = 1163.0
 
 [node name="CheckBox" type="CheckBox" parent="VBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 90
+theme_override_font_sizes/font_size = 100
 theme_override_icons/checked = ExtResource("2_72m3n")
 theme_override_icons/unchecked = ExtResource("3_l658a")
 keep_pressed_outside = true
@@ -27,7 +27,7 @@ text = "Variable Jump Height"
 
 [node name="CheckBox2" type="CheckBox" parent="VBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 90
+theme_override_font_sizes/font_size = 100
 theme_override_icons/checked = ExtResource("2_72m3n")
 theme_override_icons/unchecked = ExtResource("3_l658a")
 keep_pressed_outside = true
@@ -35,7 +35,7 @@ text = "Separate Buttons for Jump and Throw"
 
 [node name="CheckBox3" type="CheckBox" parent="VBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 90
+theme_override_font_sizes/font_size = 100
 theme_override_icons/checked = ExtResource("2_72m3n")
 theme_override_icons/unchecked = ExtResource("3_l658a")
 keep_pressed_outside = true
@@ -46,7 +46,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBox/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 90
+theme_override_font_sizes/font_size = 70
 text = "Gravity"
 
 [node name="HSlider" type="HSlider" parent="VBox/HBoxContainer"]
@@ -64,7 +64,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBox/HBoxContainer2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 90
+theme_override_font_sizes/font_size = 70
 text = "Throw Power"
 
 [node name="HSlider" type="HSlider" parent="VBox/HBoxContainer2"]
@@ -82,7 +82,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBox/HBoxContainer3"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 90
+theme_override_font_sizes/font_size = 70
 text = "Movement Speed"
 
 [node name="HSlider" type="HSlider" parent="VBox/HBoxContainer3"]
@@ -100,7 +100,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBox/HBoxContainer4"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 90
+theme_override_font_sizes/font_size = 70
 text = "Jump Height"
 
 [node name="HSlider" type="HSlider" parent="VBox/HBoxContainer4"]
@@ -118,10 +118,28 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBox/HBoxContainer5"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 90
+theme_override_font_sizes/font_size = 70
 text = "Rotation Speed"
 
 [node name="HSlider" type="HSlider" parent="VBox/HBoxContainer5"]
+custom_minimum_size = Vector2(1200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+value = 50.0
+scrollable = false
+tick_count = 10
+ticks_on_borders = true
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/HBoxContainer6"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "Win Score"
+
+[node name="HSlider" type="HSlider" parent="VBox/HBoxContainer6"]
 custom_minimum_size = Vector2(1200, 0)
 layout_mode = 2
 size_flags_horizontal = 10
