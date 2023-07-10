@@ -95,7 +95,8 @@ func update_character_x_scale():
 
 func is_still_holding_jump(delta: float) -> bool:
 	if not Input.is_action_pressed(action_name):
-		return false
+		if not root.get_button(swordsman_name).is_pressed():
+			return false
 	if time_in_air > ConstData.MAX_JUMP_HOLD_TIME:
 		return false
 	return true

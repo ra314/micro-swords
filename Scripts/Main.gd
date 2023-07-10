@@ -26,6 +26,14 @@ func connect_buttons_to_player_actions():
 	$Button1.pressed.connect($Black.action)
 	$Button2.pressed.connect($Blue.action)
 
+func get_button(man: ENUMS.SWORDSMAN) -> TouchScreenButton:
+	if man == ENUMS.SWORDSMAN.BLACK:
+		return $Button1
+	if man == ENUMS.SWORDSMAN.BLUE:
+		return $Button2
+	assert(false)
+	return null
+
 func get_sword(item: ENUMS.HELD_ITEM) -> Sword: 
 	if item == ENUMS.HELD_ITEM.SWORD_1:
 		return $Sword1
