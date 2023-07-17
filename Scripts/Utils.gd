@@ -17,3 +17,12 @@ static func detect_collision(collider_name: String, object: CharacterBody2D) -> 
 		if collider.name.contains(collider_name):
 			return true
 	return false
+
+static func calc_max_jump_height(gravity: float, jump_velocity: float) -> float:
+	var velocity := jump_velocity
+	var position := 0.0
+	var delta := 1.0/Engine.physics_ticks_per_second
+	while velocity >= 0:
+		position += velocity * delta
+		velocity -= gravity * delta
+	return position
