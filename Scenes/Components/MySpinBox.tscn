@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bv5uw6oi3asgo"]
+
+[ext_resource type="Texture2D" uid="uid://rnh7y6412gfx" path="res://Assets/arrow-long-top-icon.svg" id="1_f0ood"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_8mmlv"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MySpinBox" type="SpinBox" parent="."]
+layout_mode = 2
+theme_override_icons/updown = SubResource("ImageTexture_8mmlv")
+
+[node name="VBoxContainer" type="Node2D" parent="."]
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer"]
+offset_left = 67.0
+offset_top = -1.0
+offset_right = 394.0
+offset_bottom = 511.0
+scale = Vector2(0.1, 0.1)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("1_f0ood")

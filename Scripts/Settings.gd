@@ -8,7 +8,6 @@ func _ready():
 	$TextureButton.button_up.connect(load_level_selector)
 	init_check_boxes()
 	init_text()
-	init_buttons()
 	$VBox/DOUBLE_JUMP.button_up.connect(func(): ConstData.DOUBLE_JUMP = !ConstData.DOUBLE_JUMP)
 	$VBox/VARIABLE_JUMP_HEIGHT.button_up.connect(func(): ConstData.VARIABLE_JUMP_HEIGHT = !ConstData.VARIABLE_JUMP_HEIGHT)
 	$VBox/SEPARATE_BUTTONS.button_up.connect(func(): ConstData.SEPARATE_BUTTONS = !ConstData.SEPARATE_BUTTONS)
@@ -23,19 +22,15 @@ func init_text():
 	for child in $VBox.get_children():
 		if child is HBoxContainer:
 			var property_name = child.name
-			var value = child.get_node("Label2")
+			var spinbox = child.get_node("Label2")
 			var extents = child.get_node("Label3")
-			value.text = str(ConstData.DEFAULTS[property_name][2])
+			spinbox.value = ConstData.DEFAULTS[property_name][2]
 			var max = ConstData.DEFAULTS[property_name][1]
 			var min = ConstData.DEFAULTS[property_name][0]
 			extents.text = "min: %d, max: %d" % [min, max]
-
-func init_buttons():
-	for child in $VBox.get_children():
-		if child is HBoxContainer:
-			var button: Button
-			button = child.get_node("Label2")
-			button.button_up.connect(func(): last_selected_button = button)
+			spinbox.min_value = min
+			spinbox.max_value = max
+			spinbox.step = ConstData.DEFAULTS[property_name][3]
 
 func load_level_selector():
 	var level_selector = load("res://Scenes/Level Selector.tscn").instantiate()

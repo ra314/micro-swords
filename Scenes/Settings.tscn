@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://5150remwt8vn" path="res://Assets/check.svg" id="2_72m3n"]
 [ext_resource type="Texture2D" uid="uid://b7fohabtmjfhr" path="res://Assets/cross.svg" id="3_l658a"]
 [ext_resource type="Texture2D" uid="uid://dy2634y5831sw" path="res://Assets/back-arrow.svg" id="4_s3nhn"]
-[ext_resource type="PackedScene" uid="uid://b2yn0vj40xarn" path="res://Scenes/Components/Numpad.tscn" id="5_qv2mv"]
+[ext_resource type="Texture2D" uid="uid://c5pmk0pfsbiwe" path="res://Assets/refresh-icon.svg" id="6_764o2"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1mrep"]
-bg_color = Color(0.803922, 0.27451, 0.247059, 1)
+[sub_resource type="Theme" id="Theme_g7ikb"]
+default_font_size = 50
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -18,8 +18,8 @@ script = ExtResource("1_hcaqw")
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 2000.0
-offset_bottom = 1163.0
+offset_right = 2029.0
+offset_bottom = 1074.0
 
 [node name="VARIABLE_JUMP_HEIGHT" type="CheckBox" parent="VBox"]
 layout_mode = 2
@@ -57,12 +57,11 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 60
 text = "Gravity:"
 
-[node name="Label2" type="Button" parent="VBox/GRAVITY"]
+[node name="Label2" type="SpinBox" parent="VBox/GRAVITY"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_1mrep")
-text = "3000"
+theme = SubResource("Theme_g7ikb")
+value = 100.0
 
 [node name="Label3" type="Label" parent="VBox/GRAVITY"]
 custom_minimum_size = Vector2(650, 0)
@@ -83,12 +82,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Win Score"
 
-[node name="Label2" type="Button" parent="VBox/WIN_SCORE"]
+[node name="Label2" type="SpinBox" parent="VBox/WIN_SCORE"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_1mrep")
-text = "3000"
+theme = SubResource("Theme_g7ikb")
+value = 100.0
 
 [node name="Label3" type="Label" parent="VBox/WIN_SCORE"]
 custom_minimum_size = Vector2(650, 0)
@@ -109,12 +107,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Throw Power"
 
-[node name="Label2" type="Button" parent="VBox/THROW_SPEED"]
+[node name="Label2" type="SpinBox" parent="VBox/THROW_SPEED"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_1mrep")
-text = "3000"
+theme = SubResource("Theme_g7ikb")
+value = 100.0
 
 [node name="Label3" type="Label" parent="VBox/THROW_SPEED"]
 custom_minimum_size = Vector2(650, 0)
@@ -135,12 +132,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Movement Speed"
 
-[node name="Label2" type="Button" parent="VBox/SPEED"]
+[node name="Label2" type="SpinBox" parent="VBox/SPEED"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_1mrep")
-text = "3000"
+theme = SubResource("Theme_g7ikb")
+value = 100.0
 
 [node name="Label3" type="Label" parent="VBox/SPEED"]
 custom_minimum_size = Vector2(650, 0)
@@ -161,12 +157,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Jump Speed"
 
-[node name="Label2" type="Button" parent="VBox/JUMP_VELOCITY"]
+[node name="Label2" type="SpinBox" parent="VBox/JUMP_VELOCITY"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_1mrep")
-text = "3000"
+theme = SubResource("Theme_g7ikb")
+value = 100.0
 
 [node name="Label3" type="Label" parent="VBox/JUMP_VELOCITY"]
 custom_minimum_size = Vector2(650, 0)
@@ -187,12 +182,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Rotation Extent"
 
-[node name="Label2" type="Button" parent="VBox/MAX_ROT_RANGE_DEG"]
+[node name="Label2" type="SpinBox" parent="VBox/MAX_ROT_RANGE_DEG"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_1mrep")
-text = "3000"
+theme = SubResource("Theme_g7ikb")
+value = 100.0
 
 [node name="Label3" type="Label" parent="VBox/MAX_ROT_RANGE_DEG"]
 custom_minimum_size = Vector2(650, 0)
@@ -214,12 +208,11 @@ theme_override_font_sizes/font_size = 60
 text = "Rotation Speed
 "
 
-[node name="Label2" type="Button" parent="VBox/ROT_SPEED"]
+[node name="Label2" type="SpinBox" parent="VBox/ROT_SPEED"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_1mrep")
-text = "3000"
+theme = SubResource("Theme_g7ikb")
+value = 100.0
 
 [node name="Label3" type="Label" parent="VBox/ROT_SPEED"]
 custom_minimum_size = Vector2(650, 0)
@@ -239,9 +232,14 @@ offset_bottom = 123.0
 grow_horizontal = 0
 texture_normal = ExtResource("4_s3nhn")
 
-[node name="Numpad" parent="." instance=ExtResource("5_qv2mv")]
-offset_left = 1756.0
-offset_top = 456.0
-offset_right = 1756.0
-offset_bottom = 456.0
-scale = Vector2(0.75, 0.75)
+[node name="TextureButton2" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -665.0
+offset_top = 659.0
+offset_right = -542.0
+offset_bottom = 782.0
+grow_horizontal = 0
+texture_normal = ExtResource("6_764o2")
