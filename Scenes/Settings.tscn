@@ -232,7 +232,7 @@ offset_bottom = 123.0
 grow_horizontal = 0
 texture_normal = ExtResource("4_s3nhn")
 
-[node name="TextureButton2" type="TextureButton" parent="."]
+[node name="Reset" type="TextureButton" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
