@@ -7,6 +7,7 @@ var holding_jump := false
 var action_name
 # Time spent after jumping before being grounded.
 var time_in_air := 0.0
+@onready var JUMP_VELOCITY = Utils.calc_jump_velocity(ConstData.GRAVITY, ConstData.MAX_JUMP_HEIGHT)
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 @export var direction: ENUMS.DIRECTION
@@ -48,7 +49,6 @@ func _ready():
 	update_held_sword_location(root.get_sword(held_item))
 	root.get_sword(held_item).last_holder = swordsman_name
 	$AnimationPlayer.play("Walk")
-#	debug_orig_y = position.y
 
 func flip_rotation():
 	rotating_clockwise = not rotating_clockwise
@@ -222,7 +222,7 @@ func can_jump() -> bool:
 	return false
 
 func jump():
-	velocity.y = -ConstData.JUMP_VELOCITY
+	velocity.y = -JUMP_VELOCITY
 	holding_jump = true
 
 func can_throw():
