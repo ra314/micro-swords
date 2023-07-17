@@ -7,7 +7,7 @@ var holding_jump := false
 var action_name
 # Time spent after jumping before being grounded.
 var time_in_air := 0.0
-@onready var JUMP_VELOCITY = Utils.calc_jump_velocity(ConstData.GRAVITY, ConstData.MAX_JUMP_HEIGHT)
+@onready var JUMP_VELOCITY = Utils.calc_jump_velocity(ConstData.GRAVITY, ConstData.MAX_JUMP_HEIGHT, ConstData.VARIABLE_JUMP_HEIGHT, ConstData.REDUCED_GRAVITY_WHEN_HOLDING_JUMP, ConstData.MAX_JUMP_HOLD_TIME)
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 @export var direction: ENUMS.DIRECTION

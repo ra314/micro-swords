@@ -18,12 +18,12 @@ static func detect_collision(collider_name: String, object: CharacterBody2D) -> 
 			return true
 	return false
 
-static func calc_jump_velocity(gravity: float, max_jump_height: float) -> float:
+static func calc_jump_velocity(gravity: float, max_jump_height: float, variable_jump_height_allowed: bool, reduced_gravity: float, reduced_gravity_duration: float) -> float:
 	# Binary search
 	var min := 0.0
 	var max := 1000000.0
 	var curr = max/2
-	var height = calc_max_jump_height(gravity, curr)
+	var height = calc_max_jump_height(gravity, curr, variable_jump_height_allowed, reduced_gravity, reduced_gravity_duration)
 	while abs(max_jump_height-height) > 0.1:
 		if height > max_jump_height:
 			max = curr
@@ -31,17 +31,28 @@ static func calc_jump_velocity(gravity: float, max_jump_height: float) -> float:
 		else:
 			min = curr
 			curr += (curr+max)/2.0
-		height = calc_max_jump_height(gravity, curr)
+		height = calc_max_jump_height(gravity, curr, variable_jump_height_allowed, reduced_gravity, reduced_gravity_duration)
 	return curr
-	
 
-static func calc_max_jump_height(gravity: float, jump_velocity: float) -> float:
-	var velocity := jump_velocity
-	var position := 0.0
+static func calc_max_jump_height(gravity: float, jump_velocity: float, variable_jump_height_allowed: bool, reduced_gravity: float, reduced_gravity_duration: float) -> float:
+	# Validation
+	if variable_jump_height_allowed:
+		assert(reduced_gravity >= 0)
+		assert(reduced_gravity_duration > 0)
+		assert(reduced_gravity < gravity)
 	var delta := 1.0/Engine.physics_ticks_per_second
 	var decrement_per_tick = gravity * delta
-	assert(velocity > decrement_per_tick)
+	assert(jump_velocity > decrement_per_tick)
+	
+	# Logic
+	var velocity := jump_velocity
+	var position := 0.0
+	var time_in_air := 0.0
 	while velocity >= 0:
 		position += velocity * delta
-		velocity -= gravity * delta
+		if variable_jump_height_allowed and time_in_air < reduced_gravity_duration:
+			velocity -= reduced_gravity * delta
+		else:
+			velocity -= gravity * delta
+		time_in_air += delta
 	return position
